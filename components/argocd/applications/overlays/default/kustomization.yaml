@@ -11,7 +11,7 @@ patches:
       group: argoproj.io
       version: v1alpha1
       kind: Application
-      name: mlops-demo-tenant-app-of-apps
+      name: mlops-demo-app-of-apps
     path: patch-app-of-apps.yaml
   - target:
       group: argoproj.io

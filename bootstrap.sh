@@ -20,7 +20,7 @@ main(){
     echo ""
     echo "Deploying tenant instance.  Check the status of the sync here:
     "
-    route=$(oc get route openshift-gitops-server -o=jsonpath='{.spec.host}' -n ${ARGO_NS})
+    route=$(oc get route argocd-server -o=jsonpath='{.spec.host}' -n ${ARGO_NS})
 
     echo "https://${route}"
 }
