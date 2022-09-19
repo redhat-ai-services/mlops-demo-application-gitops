@@ -43,12 +43,12 @@ done
 for i in `find "${KUSTOMIZE_DIRS}" -name "kustomization.yaml" -exec dirname {} \;`; 
 do
 
-  if [[ ${i} == *"./bootstrap"* ]]; then
-    echo
-    echo "Skipping validating $i"
-    echo
-    continue
-  fi
+  # if [[ ${i} == *"./bootstrap"* ]]; then
+  #   echo
+  #   echo "Skipping validating $i"
+  #   echo
+  #   continue
+  # fi
 
   echo
   echo "Validating $i"
