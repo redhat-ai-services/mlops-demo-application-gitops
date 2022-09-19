@@ -18,7 +18,7 @@ main(){
     kustomize build ${BOOTSTRAP_DIR} | oc apply -f -
 
     echo ""
-    echo "Deploying tenant instance.  Check the status of the sync here:
+    echo "Deploying application components.  Check the status of the sync here:
     "
     route=$(oc get route argocd-server -o=jsonpath='{.spec.host}' -n ${ARGO_NS})
 
