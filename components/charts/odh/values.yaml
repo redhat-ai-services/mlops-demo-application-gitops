@@ -1,1 +1,7 @@
-odh: {}
+odh:
+  jupyterHub:
+    enabled: true
+  additionalNotebooks:
+    enabled: true
+  odhDashboard:
+    enabled: true  
