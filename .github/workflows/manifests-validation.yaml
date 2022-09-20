@@ -11,7 +11,7 @@ jobs:
   kustomize-lint:
     runs-on: ubuntu-latest
     env:
-      KUSTOMIZE_VERSION: 3.9.4
+      KUSTOMIZE_VERSION: 4.5.7
     steps:
       - name: Install Kustomize
         run: |
