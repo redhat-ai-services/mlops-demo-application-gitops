@@ -37,3 +37,16 @@ jobs:
           pip install yamllint
       - name: Validate Manifests
         run: yamllint . -f github
+  helm-lint:
+    runs-on: ubuntu-latest
+    env:
+      HELM_VERSION: 3.9.4
+    steps:
+      - name: Install Helm
+        run: |
+          sudo curl -L -o /usr/bin/helm https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz
+          sudo chmod +x /usr/bin/helm
+      - name: Code Checkout
+        uses: actions/checkout@v2
+      - name: Validate Manifests
+        run: helm lint components/charts/odh/values.yaml
