@@ -49,4 +49,4 @@ jobs:
       - name: Code Checkout
         uses: actions/checkout@v2
       - name: Validate Manifests
-        run: helm lint components/charts/odh/values.yaml
+        run: helm lint components/charts/odh/
