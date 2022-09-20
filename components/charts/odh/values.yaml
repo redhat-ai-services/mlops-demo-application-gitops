@@ -4,4 +4,4 @@ odh:
   additionalNotebooks:
     enabled: true
   odhDashboard:
-    enabled: true  
+    enabled: true
