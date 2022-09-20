@@ -49,16 +49,16 @@ jobs:
           sudo chmod +x /usr/bin/helm
       - name: Code Checkout
         uses: actions/checkout@v2
-      - name: Validate Manifests
-        run: | 
-          for i in `find "${HELM_DIRS}" -name "Chart.yaml" -exec dirname {} \;`; 
+      - name: Validate Charts
+        run: |
+          for i in `find "${HELM_DIRS}" -name "Chart.yaml" -exec dirname {} \;`;
           do
 
             echo
             echo "Validating $i"
             echo
 
-            ${HELM} lint $i
+            helm lint $i
 
             build_response=$?
 
@@ -66,7 +66,7 @@ jobs:
               echo "Error linting $i"
               exit 1
             fi
-            
+
           done
 
           echo
