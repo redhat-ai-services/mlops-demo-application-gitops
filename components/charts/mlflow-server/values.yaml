@@ -1,0 +1,2 @@
+mlflow-server:
+  fullnameOverride: mlflow-server
