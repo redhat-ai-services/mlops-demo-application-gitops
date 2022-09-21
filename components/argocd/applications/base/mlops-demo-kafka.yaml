@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mlops-demo-odh
+  name: mlops-demo-kafka
 spec:
   destination:
-    namespace: mlops-demo-datascience
+    namespace: mlops-demo-dev
     server: https://kubernetes.default.svc
-  project: mlops-demo-datascience
+  project: mlops-demo-dev
   source:
     path: components/charts/kafka/
     repoURL: patch-me-see-tenant-overlays
