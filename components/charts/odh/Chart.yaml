@@ -9,4 +9,4 @@ version: 0.1.0
 dependencies:
   - name: "odh"
     version: "0.4.3"
-    repository: "https://strangiato.github.io/helm-charts/"
+    repository: "https://rh-intelligent-application-practice.github.io/helm-charts/"
