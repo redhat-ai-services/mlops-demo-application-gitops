@@ -8,7 +8,7 @@ spec:
     server: https://kubernetes.default.svc
   project: mlops-demo-datascience
   source:
-    path: components/charts/odh/
+    path: environments/datascience/odh/
     repoURL: patch-me-see-tenant-overlays
     targetRevision: patch-me-see-tenant-overlays
   syncPolicy:
