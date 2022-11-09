@@ -5,3 +5,7 @@ odh:
     enabled: true
   odhDashboard:
     enabled: true
+  modelMesh:
+    enabled: false
+  dataSciencePipelines:
+    enabled: false
