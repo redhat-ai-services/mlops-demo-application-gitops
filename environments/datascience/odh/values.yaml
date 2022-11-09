@@ -1,9 +1,11 @@
 odh:
   jupyterHub:
-    enabled: true
+    enabled: false
   additionalNotebooks:
     enabled: true
   odhDashboard:
+    enabled: true
+  notebookController:
     enabled: true
   modelMesh:
     enabled: false
