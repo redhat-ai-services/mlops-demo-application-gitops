@@ -1,2 +1,4 @@
 kafdrop:
   fullnameOverride: "kafdrop"
+  kafka:
+    brokerConnect: kafka-kafka-bootstrap:9092
