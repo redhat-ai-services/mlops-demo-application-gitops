@@ -4,5 +4,6 @@ kind: Kustomization
 resources:
   - mlops-demo-app-of-apps.yaml
   - mlops-demo-kafka.yaml
+  - mlops-demo-kafdrop.yaml
   # - mlops-demo-mlflow-server.yaml
   - mlops-demo-odh.yaml
