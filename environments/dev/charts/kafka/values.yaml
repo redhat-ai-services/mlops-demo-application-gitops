@@ -1,2 +1,7 @@
 kafka:
   fullnameOverride: "kafka"
+
+  topics:
+    - name: iris-inference
+    - name: iris-inference-results
+    - name: iris-real-results
