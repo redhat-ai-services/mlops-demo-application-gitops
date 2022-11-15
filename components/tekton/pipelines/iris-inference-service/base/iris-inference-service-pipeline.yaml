@@ -41,7 +41,14 @@ spec:
       workspaces:
         - name: output
           workspace: workspace
+    - name: generate-tag
+      taskRef:
+        kind: Task
+        name: generate-tag
     - name: build
+      runAfter:
+        - fetch-repository
+        - generate-tag
       params:
         - name: IMAGE
           value: $(params.IMAGE_NAME)
@@ -51,8 +58,6 @@ spec:
           value: $(params.PATH_CONTEXT)
         - name: VERSION
           value: $(params.VERSION)
-      runAfter:
-        - fetch-repository
       taskRef:
         kind: ClusterTask
         name: s2i-python
@@ -68,5 +73,9 @@ spec:
     #   taskRef:
     #     kind: ClusterTask
     #     name: openshift-client
+  results:
+    - name: image-tag
+      description: The Production Image Tag
+      value: prod-$(tasks.generate-tag.results.image-tag)
   workspaces:
     - name: workspace
