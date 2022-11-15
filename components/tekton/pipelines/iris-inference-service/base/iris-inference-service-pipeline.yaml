@@ -6,7 +6,7 @@ spec:
   params:
     - name: APP_NAME
       type: string
-      default: iris-inference-service    
+      default: iris-inference-service
     - name: GIT_REPO
       type: string
       default: >-
@@ -23,7 +23,7 @@ spec:
       default: .
     - name: VERSION
       type: string
-      default: 3.9-ubi8    
+      default: 3.9-ubi8
   tasks:
     - name: fetch-repository
       params:
