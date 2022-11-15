@@ -13,6 +13,7 @@ commonLabels:
 
 resources:
   - iris-inference-service-eventlistener.yaml
+  - iris-inference-service-eventlistener-route.yaml
   - iris-inference-service-imagestream.yaml
   - iris-inference-service-pipeline.yaml
   - iris-inference-service-trigger-template.yaml
