@@ -75,6 +75,6 @@ spec:
           value: |
             oc tag \
             $(params.APP_NAME)@$(tasks.build.results.IMAGE_DIGEST) \
-            $(params.APP_NAME)@$(tasks.generate-tag.results.image-tag)
+            $(params.APP_NAME):$(tasks.generate-tag.results.image-tag)
   workspaces:
     - name: workspace
