@@ -64,18 +64,16 @@ spec:
       workspaces:
         - name: source
           workspace: workspace
-    # - name: deploy
-    #   params:
-    #     - name: SCRIPT
-    #       value: oc rollout status deploy/$(params.APP_NAME)
-    #   runAfter:
-    #     - build
-    #   taskRef:
-    #     kind: ClusterTask
-    #     name: openshift-client
-  results:
-    - name: image-tag
-      description: The Production Image Tag
-      value: prod-$(tasks.generate-tag.results.image-tag)
+    - name: tag-image
+      runAfter:
+        - build
+      taskRef:
+        kind: ClusterTask
+        name: openshift-client
+      params:
+        - name: SCRIPT
+          value: |
+            echo $(tasks.build.results.IMAGE_DIGEST)
+            echo $(tasks.generate-tag.results.image-tag)
   workspaces:
     - name: workspace
