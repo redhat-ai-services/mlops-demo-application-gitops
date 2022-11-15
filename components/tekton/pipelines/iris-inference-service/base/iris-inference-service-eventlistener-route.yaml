@@ -1,0 +1,12 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: el-iris-inference-service-event-listener
+spec:
+  to:
+    kind: Service
+    name: el-iris-inference-service-event-listener
+    weight: 100
+  port:
+    targetPort: 8080
+  wildcardPolicy: None

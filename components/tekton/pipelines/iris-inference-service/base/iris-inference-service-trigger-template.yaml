@@ -1,0 +1,48 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: trigger-template-iris-inference-service
+spec:
+  params:
+    - name: git-revision
+    - name: git-commit-message
+    - name: git-repo-url
+    - name: git-repo-name
+    - name: content-type
+    - name: pusher-name
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: iris-inference-service-
+      spec:
+        params:
+          - name: APP_NAME
+            value: iris-inference-service
+          - name: GIT_REPO
+            value: >-
+              https://github.com/rh-intelligent-application-practice/mlops-demo-iris-inference-service.git
+          - name: GIT_REVISION
+            value: ''
+          - name: IMAGE_NAME
+            value: >-
+              image-registry.openshift-image-registry.svc:5000/mlops-demo-pipelines/iris-inference-service
+          - name: PATH_CONTEXT
+            value: .
+          - name: VERSION
+            value: 3.9-ubi8
+        pipelineRef:
+          name: iris-inference-service
+        resources: []
+        workspaces:
+          - name: workspace
+            volumeClaimTemplate:
+              metadata:
+                labels:
+                  tekton.dev/pipeline: iris-inference-service
+              spec:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 1Gi

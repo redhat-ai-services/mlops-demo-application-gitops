@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: mlops-demo-pipelines
+spec:
+  generators:
+    - list:
+        elements:
+          - cluster: local
+            url: https://kubernetes.default.svc
+            values:
+              name: iris-inference-service-pipeline
+              namespace: mlops-demo-pipelines
+              project: mlops-demo-pipelines
+              path: components/tekton/pipelines/iris-inference-service/overlays/default/
+  template:
+    metadata:
+      name: '{{values.name}}'
+    spec:
+      destination:
+        namespace: '{{values.namespace}}'
+        server: https://kubernetes.default.svc
+      project: '{{values.project}}'
+      source:
+        path: '{{values.path}}'
+        repoURL: patch-me-see-tenant-overlays
+        targetRevision: patch-me-see-tenant-overlays
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: true
