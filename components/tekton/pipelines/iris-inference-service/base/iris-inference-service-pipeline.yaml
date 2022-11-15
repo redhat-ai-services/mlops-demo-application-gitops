@@ -73,7 +73,8 @@ spec:
       params:
         - name: SCRIPT
           value: |
-            echo $(tasks.build.results.IMAGE_DIGEST)
-            echo $(tasks.generate-tag.results.image-tag)
+            oc tag \
+            $(params.APP_NAME)@$(tasks.build.results.IMAGE_DIGEST) \
+            $(params.APP_NAME)@$(tasks.generate-tag.results.image-tag)
   workspaces:
     - name: workspace
