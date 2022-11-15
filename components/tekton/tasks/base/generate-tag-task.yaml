@@ -7,13 +7,13 @@ metadata:
       Generate a new unique image tag based on format YYYY-MM-YY-HH-MM-SS.
 spec:
   results:
-  - name: image-tag
-    description: The current date in human readable format
+    - name: image-tag
+      description: The current date in human readable format
   steps:
-  - name: generate-image-tag
-    image: registry.access.redhat.com/ubi8/ubi-minimal:8.3
-    script: |
-      #!/usr/bin/env bash
-      date +"%Y-%m-%d-%H-%M-%S" | tee /tmp/date.txt
-      # Trim the string to remove newline from the end
-      tr --delete '\n' </tmp/date.txt >$(results.image-tag.path)
+    - name: generate-image-tag
+      image: registry.access.redhat.com/ubi8/ubi-minimal:8.3
+      script: |
+        #!/usr/bin/env bash
+        date +"%Y-%m-%d-%H-%M-%S" | tee /tmp/date.txt
+        # Trim the string to remove newline from the end
+        tr --delete '\n' </tmp/date.txt >$(results.image-tag.path)
