@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mlops-demo-pipeline-tasks
+spec:
+  destination:
+    namespace: mlops-demo-gitops
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: components/tekton/tasks/overlays/default/
+    repoURL: patch-me-see-tenant-overlays
+    targetRevision: patch-me-see-tenant-overlays
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true

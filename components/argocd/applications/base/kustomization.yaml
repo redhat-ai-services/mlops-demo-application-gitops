@@ -7,4 +7,5 @@ resources:
   - mlops-demo-kafdrop.yaml
   # - mlops-demo-mlflow-server.yaml
   - mlops-demo-odh.yaml
+  - mlops-demo-pipeline-tasks.yaml
   - mlops-demo-pipelines.yaml
