@@ -42,12 +42,13 @@ spec:
         - name: output
           workspace: workspace
     - name: generate-tag
+      runAfter:
+        - fetch-repository
       taskRef:
         kind: Task
         name: generate-tag
     - name: build
       runAfter:
-        - fetch-repository
         - generate-tag
       params:
         - name: IMAGE
