@@ -82,3 +82,22 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+route:
+  # -- Enable creation of the OpenShift Route object
+  enabled: true
+  # Allow OCP to determine the host if left blank
+  # -- The hostname for the route
+  # @default -- Set by OpenShift
+  host: ""
+  # -- The path for the OpenShift route
+  path: ""
+  tls:
+    # -- Enable secure route settings
+    enabled: true
+    # -- Secure route termination policy
+    termination: edge
+    # -- Insecure route termination policy
+    insecureEdgeTerminationPolicy: Redirect
+  # -- Additional custom annotations for the route
+  annotations: {}

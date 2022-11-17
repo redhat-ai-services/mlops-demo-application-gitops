@@ -5,6 +5,7 @@ metadata:
   labels:
     {{- include "iris-inference-service.labels" . | nindent 4 }}
 spec:
+  name: {{ include "iris-inference-service.name" . }}
   predictors:
     - componentSpecs:
         - spec:
@@ -22,6 +23,5 @@ spec:
         children: []
         name: classifier
         type: MODEL
-      name: iris-inference
+      name: {{ include "iris-inference-service.name" . }}
       replicas: {{ .Values.replicaCount }}
-  name: iris-inference
