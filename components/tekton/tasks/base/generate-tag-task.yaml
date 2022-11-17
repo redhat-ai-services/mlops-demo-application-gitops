@@ -11,7 +11,7 @@ spec:
       description: The git commit sha to include in the image tag name
   results:
     - name: image-tag
-      description: The current date in human readable format
+      description: The tag in the format of ${git-sha}-${model-version}-${date}
   steps:
     - name: generate-image-tag
       image: registry.access.redhat.com/ubi8/ubi-minimal:8.3
