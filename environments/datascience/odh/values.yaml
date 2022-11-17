@@ -10,4 +10,4 @@ odh:
   modelMesh:
     enabled: false
   dataSciencePipelines:
-    enabled: false
+    enabled: true
