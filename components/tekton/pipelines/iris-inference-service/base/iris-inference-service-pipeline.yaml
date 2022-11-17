@@ -47,6 +47,9 @@ spec:
       taskRef:
         kind: Task
         name: generate-tag
+      workspaces:
+        - name: source
+          workspace: workspace
     - name: build
       runAfter:
         - generate-tag

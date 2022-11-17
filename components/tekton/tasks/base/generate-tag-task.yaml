@@ -16,9 +16,6 @@ spec:
         #!/usr/bin/env sh
         set -e
 
-        ls -laF
-        tree -d
-
         # get the git sha
         sha=$(git rev-parse --short HEAD)
 
@@ -31,3 +28,6 @@ spec:
         tag=$(${sha}-${model_version}-${date})
 
         echo ${tag} | tee $(results.image-tag.path)
+  workspaces:
+    - mountPath: /workspace/source
+      name: source
