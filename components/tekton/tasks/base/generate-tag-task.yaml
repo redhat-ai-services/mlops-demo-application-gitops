@@ -13,9 +13,9 @@ spec:
     - name: generate-image-tag
       image: docker.io/alpine/git:v2.26.2
       script: |
-        #!/usr/bin/env bash
+        #!/usr/bin/env sh
         set -e
-        
+
         # get the git sha
         sha=$(git rev-parse --short HEAD)
 
