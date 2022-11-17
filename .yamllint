@@ -8,3 +8,6 @@ rules:
     ignore: /grafana-operator/base/instance/grafana.yaml
   truthy:
     ignore: .github/workflows/
+
+ignore: |
+  **/templates/*.yaml
