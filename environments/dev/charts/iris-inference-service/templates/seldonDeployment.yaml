@@ -19,6 +19,25 @@ spec:
                 imagePullPolicy: {{ .Values.image.pullPolicy }}    
                 resources:
                     {{- toYaml .Values.resources | nindent 20 }}
+                livenessProbe:
+                    failureThreshold: 3
+                    initialDelaySeconds: 10
+                    periodSeconds: 5
+                    successThreshold: 1
+                    httpGet:
+                        path: /health/status
+                        port: http
+                        scheme: HTTP
+                        timeoutSeconds: 1
+                readinessProbe:
+                    failureThreshold: 3
+                    initialDelaySeconds: 10
+                    periodSeconds: 5
+                    successThreshold: 1
+                    httpGet:
+                        path: /health/status
+                        port: http
+                        scheme: HTTP
       graph:
         children: []
         name: classifier
