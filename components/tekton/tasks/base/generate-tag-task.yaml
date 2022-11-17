@@ -11,9 +11,10 @@ spec:
       description: The current date in human readable format
   steps:
     - name: generate-image-tag
-      image: registry.access.redhat.com/ubi8/ubi-minimal:8.3
+      image: docker.io/alpine/git:v2.26.2
       script: |
         #!/usr/bin/env bash
+        set -e
         
         # get the git sha
         sha=$(git rev-parse --short HEAD)
