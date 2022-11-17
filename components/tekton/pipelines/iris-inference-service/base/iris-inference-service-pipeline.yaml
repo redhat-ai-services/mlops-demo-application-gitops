@@ -44,12 +44,12 @@ spec:
     - name: generate-tag
       runAfter:
         - fetch-repository
+      params:
+        - name: SHA
+          value: $(tasks.fetch-repository.results.commit)
       taskRef:
         kind: Task
         name: generate-tag
-      workspaces:
-        - name: source
-          workspace: workspace
     - name: build
       runAfter:
         - generate-tag

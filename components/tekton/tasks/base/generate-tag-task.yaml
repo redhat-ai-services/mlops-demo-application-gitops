@@ -6,6 +6,9 @@ metadata:
     description: |
       Generate a new unique image tag based on format YYYY-MM-YY-HH-MM-SS.
 spec:
+  params:
+    - name: SHA
+      description: The git commit sha to include in the image tag name
   results:
     - name: image-tag
       description: The current date in human readable format
@@ -16,11 +19,8 @@ spec:
         #!/usr/bin/env sh
         set -e
 
-        pwd
-        ls -laF
-
         # get the git sha
-        sha=$(git rev-parse --short HEAD)
+        sha=$(echo $(params.SHA) | cut -c1-7)
 
         # get the ml-model version
         model_version="1"
