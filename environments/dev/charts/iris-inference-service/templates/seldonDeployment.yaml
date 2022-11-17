@@ -1,0 +1,27 @@
+apiVersion: machinelearning.seldon.io/v1
+kind: SeldonDeployment
+metadata:
+  name: {{ include "iris-inference-service.fullname" . }}
+  labels:
+    {{- include "iris-inference-service.labels" . | nindent 4 }}
+spec:
+  predictors:
+    - componentSpecs:
+        - spec:
+            {{- with .Values.imagePullSecrets }}
+            imagePullSecrets:
+                {{- toYaml . | nindent 8 }}
+            {{- end }}
+            containers:
+              - name: classifier
+                image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+                imagePullPolicy: {{ .Values.image.pullPolicy }}    
+                resources:
+                    {{- toYaml .Values.resources | nindent 20 }}
+      graph:
+        children: []
+        name: classifier
+        type: MODEL
+      name: iris-inference
+      replicas: {{ .Values.replicaCount }}
+  name: iris-inference
