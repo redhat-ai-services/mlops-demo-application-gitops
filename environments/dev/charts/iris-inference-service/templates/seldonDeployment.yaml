@@ -31,7 +31,6 @@ spec:
                         path: /health/status
                         port: http
                         scheme: HTTP
-                        timeoutSeconds: 1
                 readinessProbe:
                     failureThreshold: 3
                     initialDelaySeconds: 10
