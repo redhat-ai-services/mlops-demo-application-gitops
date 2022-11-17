@@ -14,6 +14,16 @@ spec:
       image: registry.access.redhat.com/ubi8/ubi-minimal:8.3
       script: |
         #!/usr/bin/env bash
-        date +"%Y-%m-%d-%H-%M-%S" | tee /tmp/date.txt
-        # Trim the string to remove newline from the end
-        tr --delete '\n' </tmp/date.txt >$(results.image-tag.path)
+        
+        # get the git sha
+        sha=$(git rev-parse --short HEAD)
+
+        # get the ml-model version
+        model_version="1"
+
+        # generate the current date/time
+        date=$(date +"%Y%m%d-%H%M%S")
+
+        tag=$(${sha}-${model_version}-${date})
+
+        echo ${tag} | tee $(results.image-tag.path)
