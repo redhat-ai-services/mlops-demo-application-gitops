@@ -28,7 +28,7 @@ spec:
         # generate the current date/time
         date=$(date +"%Y%m%d-%H%M%S")
 
-        tag=$(${sha}-${model_version}-${date})
+        tag=${sha}-${model_version}-${date}
 
         echo ${tag}
         echo ${tag} > $(results.image-tag.path)
