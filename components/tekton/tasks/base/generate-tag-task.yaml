@@ -31,7 +31,3 @@ spec:
         tag=$(${sha}-${model_version}-${date})
 
         echo ${tag} | tee $(results.image-tag.path)
-      workingDir: $(workspaces.source.path)
-  workspaces:
-    - mountPath: /workspace/source
-      name: source
