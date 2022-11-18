@@ -52,7 +52,7 @@ spec:
         name: generate-tag
     - name: build
       runAfter:
-        - generate-tag
+        - fetch-repository
       params:
         - name: IMAGE
           value: $(params.IMAGE_NAME)
@@ -70,6 +70,7 @@ spec:
           workspace: workspace
     - name: tag-image
       runAfter:
+        - generate-tag
         - build
       taskRef:
         kind: ClusterTask
