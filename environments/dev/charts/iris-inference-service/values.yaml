@@ -11,7 +11,7 @@ image:
   repository: image-registry.openshift-image-registry.svc:5000/mlops-demo-pipelines/iris-inference-service
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "c21b9d3-1-20221118-200140"
+  tag: "f8297c7-1-20221118-202056"
 
 imagePullSecrets: []
 
