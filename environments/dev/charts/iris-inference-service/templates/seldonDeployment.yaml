@@ -13,7 +13,6 @@ spec:
             imagePullSecrets:
                 {{- toYaml . | nindent 8 }}
             {{- end }}
-            serviceAccountName: {{ include "iris-inference-service.serviceAccountName" . }}
             securityContext:
               {{- toYaml .Values.podSecurityContext | nindent 14 }}
             containers:
