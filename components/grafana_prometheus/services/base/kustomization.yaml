@@ -6,6 +6,7 @@ namespace: mlops-demo-dev
 resources: 
 - prometheus-instance.yaml
 - prometheus-route.yaml
+- rest-seldon-model-servicemonitor.yaml
 - grafana-instance.yaml
 - grafana-prometheus-datasource.yaml
 - prediction-analytics-seldon-core-1.2.2.yaml

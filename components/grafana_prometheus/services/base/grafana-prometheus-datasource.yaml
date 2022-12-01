@@ -13,4 +13,4 @@ spec:
       type: prometheus
       url: 'http://prometheus-operated:9090'
       version: 1
-  name: manuela-prometheus.yaml
+  name: andrew-prometheus.yaml
