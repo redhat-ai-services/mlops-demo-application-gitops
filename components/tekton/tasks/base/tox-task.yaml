@@ -33,6 +33,9 @@ spec:
   steps:
     - name: unit-test
       image: image-registry.openshift-image-registry.svc:5000/openshift/python:$(inputs.params.PYTHON)
+      env:
+        - name: TOX_PARALLEL_NO_SPINNER
+          value: "1"
       workingDir: $(workspaces.source.path)
       script: |
         export PATH=$PATH:$HOME/.local/bin
