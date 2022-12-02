@@ -31,7 +31,7 @@ spec:
       description: The name of the requirements file inside the source location, with fallback to the requirements file in the root location
       default: "requirements.txt"
   steps:
-    - name: unit-test
+    - name: tox-execution
       image: image-registry.openshift-image-registry.svc:5000/openshift/python:$(inputs.params.PYTHON)
       env:
         - name: TOX_PARALLEL_NO_SPINNER
