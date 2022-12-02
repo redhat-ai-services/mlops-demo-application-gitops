@@ -41,9 +41,25 @@ spec:
       workspaces:
         - name: output
           workspace: workspace
-    - name: generate-tag
+    - name: test
       runAfter:
         - fetch-repository
+      params:
+        - name: IMAGE
+          value: $(params.IMAGE_NAME)
+        - name: SOURCE_PATH
+          value: $(params.PATH_CONTEXT)
+        - name: PYTHON
+          value: $(params.VERSION)
+      taskRef:
+        kind: ClusterTask
+        name: s2i-python
+      workspaces:
+        - name: source
+          workspace: workspace
+    - name: generate-tag
+      runAfter:
+        - test
       params:
         - name: SHA
           value: $(tasks.fetch-repository.results.commit)
@@ -52,7 +68,7 @@ spec:
         name: generate-tag
     - name: build
       runAfter:
-        - fetch-repository
+        - test
       params:
         - name: IMAGE
           value: $(params.IMAGE_NAME)

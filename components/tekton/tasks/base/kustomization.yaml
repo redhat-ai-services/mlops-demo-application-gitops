@@ -3,3 +3,4 @@ kind: Kustomization
 
 resources:
   - generate-tag-task.yaml
+  - tox-task.yaml
