@@ -45,8 +45,6 @@ spec:
       runAfter:
         - fetch-repository
       params:
-        - name: IMAGE
-          value: $(params.IMAGE_NAME)
         - name: SOURCE_PATH
           value: $(params.PATH_CONTEXT)
         - name: PYTHON
