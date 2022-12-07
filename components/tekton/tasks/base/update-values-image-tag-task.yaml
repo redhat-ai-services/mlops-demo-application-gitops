@@ -46,7 +46,9 @@ spec:
       fi
       
       imageTagTrimmed=$(echo "${m//[$'\t\r\n']}")
-      sed -i "s/tag: ".*"/tag: "$imageTagTrimmed"/" ./$(params.filePath)/$(params.fileName) || sleep 2m
+      sed -i "s/tag: ".*"/tag: "$imageTagTrimmed"/" ./$(params.filePath)/$(params.fileName)
+
+      cat ./$(params.filePath)/$(params.fileName)
       
   # - name: commit-push-changes
   #   image: alpine/git:v2.26.2
