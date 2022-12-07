@@ -45,7 +45,9 @@ spec:
         echo "**** Updating $(params.fileName) image tag to $(params.imageTag)"
       fi
 
-      sed -i "s/tag: ".*"/tag: "$(params.imageTag)"/" ./$(params.filePath)/$(params.fileName)
+      cat ./$(params.filePath)/$(params.fileName)
+      
+      sed -i "s#tag: ".*"#tag: "$(params.imageTag)"#g" ./$(params.filePath)/$(params.fileName)
 
       cat ./$(params.filePath)/$(params.fileName)
 
