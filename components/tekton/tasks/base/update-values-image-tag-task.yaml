@@ -47,7 +47,7 @@ spec:
 
       cat ./$(params.filePath)/$(params.fileName)
       
-      sed -i 's/tag: ".*"/tag: "$(params.imageTag)"/g' ./$(params.filePath)/$(params.fileName)
+      sed -i "s/tag: ".*"/tag: "$(params.imageTag)"/g" ./$(params.filePath)/$(params.fileName)
 
       cat ./$(params.filePath)/$(params.fileName)
 
