@@ -39,7 +39,7 @@ spec:
     #   mountPath: /workspace/repository
     script: |
       #!/usr/bin/env sh
-      # set -e
+      set -e
 
       if [[ "$(params.verbose)" == "true" ]] ; then
         echo "**** Updating $(params.fileName) image tag to $(params.imageTag)"
@@ -47,12 +47,7 @@ spec:
       
       imageTag=$(params.imageTag)
       imageTagTrimmed=$(echo "${imageTag//[$'\t\r\n']}")
-      echo $imageTagTrimmed
       sed -i "s/tag: ".*"/tag: "$imageTagTrimmed"/" ./$(params.filePath)/$(params.fileName)
-
-      cat ./$(params.filePath)/$(params.fileName)
-
-      sleep 4m
       
   # - name: commit-push-changes
   #   image: alpine/git:v2.26.2
