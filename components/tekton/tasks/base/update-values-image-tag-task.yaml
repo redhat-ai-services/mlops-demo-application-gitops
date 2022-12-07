@@ -45,10 +45,13 @@ spec:
         echo "**** Updating $(params.fileName) image tag to $(params.imageTag)"
       fi
       
-      imageTagTrimmed=$(echo "${m//[$'\t\r\n']}")
+      imageTagTrimmed=$(echo "${$(params.fileName)//[$'\t\r\n']}")
+      echo $imageTagTrimmed
       sed -i "s/tag: ".*"/tag: "$imageTagTrimmed"/" ./$(params.filePath)/$(params.fileName)
 
       cat ./$(params.filePath)/$(params.fileName)
+
+      sleep 4m
       
   # - name: commit-push-changes
   #   image: alpine/git:v2.26.2
