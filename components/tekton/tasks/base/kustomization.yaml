@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - generate-tag-task.yaml
   - tox-task.yaml
+  - task-update-values-image-tag.yaml
