@@ -34,8 +34,8 @@ spec:
         - name: SHA
           value: ""
       taskRef:
-          kind: Task
-          name: generate-tag
+        kind: Task
+        name: generate-tag
     - name: update-values
       runAfter:
       - git-clone
