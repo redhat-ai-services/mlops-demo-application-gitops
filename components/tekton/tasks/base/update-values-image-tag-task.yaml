@@ -45,8 +45,7 @@ spec:
         echo "**** Updating $(params.fileName) image tag to $(params.imageTag)"
       fi
       
-      cd ./$(params.filePath)/$(params.fileName)
-      sed -i "s/tag: ".*"/tag: "$(params.imageTag)"/" $(params.fileName)
+      sed -i "s/tag: ".*"/tag: "$(params.imageTag)"/" ./$(params.filePath)/$(params.fileName) || sleep 5m
       
   # - name: commit-push-changes
   #   image: alpine/git:v2.26.2
