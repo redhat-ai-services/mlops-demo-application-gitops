@@ -32,11 +32,14 @@ spec:
     workingDir: $(workspaces.source.path)
     script: |
       #!/usr/bin/env sh
-      #set -e
+      set -e
 
       if [[ "$(params.verbose)" == "true" ]] ; then
         echo "**** Pushing $(params.gitRepositoryName) repository branch $(params.gitRepositoryRevision) to remote origin"
       fi
+
+      commitMessage=$(params.commitMessage)
+      commitMessageTrimmed=$(echo "${commitMessage//[$'\t\r\n']}")
 
       git config --global user.email "tekton@tekton.dev"
       git config --global user.name "OpenShift Pipeline"
@@ -48,7 +51,7 @@ spec:
       echo $(git remote -v)
 
       git add .
-      git commit --allow-empty -m "[OpenShift Pipeline] $(params.commitMessage)"
-      git push
+      git commit --allow-empty -m "[OpenShift Pipeline] $commitMessageTrimmed"
+      git push origin $(params.gitRepositoryRevision)
 
       sleep 5m
