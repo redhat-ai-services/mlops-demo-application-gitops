@@ -49,4 +49,4 @@ spec:
 
       git add .
       git commit --allow-empty -m "[OpenShift Pipeline] $(params.commitMessage)"
-      git push origin $(params.gitRepositoryRevision)
+      git push
