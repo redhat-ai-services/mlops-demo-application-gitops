@@ -42,4 +42,4 @@ spec:
       git config --global user.name "OpenShift Pipeline"
       cd ./$(params.gitRepositoryPath)/$(params.gitRepositoryName)
       git commit --allow-empty -m "[OpenShift Pipeline] $(params.commitMessage)"
-      git push origin "$(params.gitRepositoryRevision)"
+      git push origin $(params.gitRepositoryRevision)
