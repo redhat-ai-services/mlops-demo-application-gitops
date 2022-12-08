@@ -69,7 +69,7 @@ spec:
       - name: gitRepositoryRevision
         value: $(params.GIT_REVISION)
       - name: commitMessage
-        value: "Updating Values YAML Image tag to $(tasks.generate-tag.results.image-tag)"
+        value: "Updating Values YAML Image tag"
       - name: verbose
         value: "true"
       workspaces:

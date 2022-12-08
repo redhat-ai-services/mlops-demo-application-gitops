@@ -38,9 +38,6 @@ spec:
         echo "**** Pushing $(params.gitRepositoryName) repository branch $(params.gitRepositoryRevision) to remote origin"
       fi
 
-      commitMessage=$(params.commitMessage)
-      commitMessageTrimmed=$(echo "${commitMessage//[$'\t\r\n']}")
-
       git config --global user.email "tekton@tekton.dev"
       git config --global user.name "OpenShift Pipeline"
       cd ./$(params.gitRepositoryPath)/$(params.gitRepositoryName)
