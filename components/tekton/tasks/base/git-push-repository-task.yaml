@@ -49,6 +49,6 @@ spec:
 
       git add .
       git commit --allow-empty -m "[OpenShift Pipeline] $(params.commitMessage)"
-      git push
+      git push git push origin HEAD:$(params.gitRepositoryRevision)
 
       sleep 5m
