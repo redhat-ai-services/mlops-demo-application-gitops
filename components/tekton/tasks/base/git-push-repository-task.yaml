@@ -41,5 +41,6 @@ spec:
       git config --global user.email "tekton@tekton.dev"
       git config --global user.name "OpenShift Pipeline"
       cd ./$(params.gitRepositoryPath)/$(params.gitRepositoryName)
+      git add .
       git commit --allow-empty -m "[OpenShift Pipeline] $(params.commitMessage)"
       git push origin $(params.gitRepositoryRevision)
