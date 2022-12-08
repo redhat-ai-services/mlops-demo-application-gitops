@@ -32,7 +32,7 @@ spec:
     workingDir: $(workspaces.source.path)
     script: |
       #!/usr/bin/env sh
-      set -e
+      # set -e
 
       if [[ "$(params.verbose)" == "true" ]] ; then
         echo "**** Pushing $(params.gitRepositoryName) repository branch $(params.gitRepositoryRevision) to remote origin"
@@ -48,7 +48,7 @@ spec:
       echo $(git remote -v)
 
       git add .
-      git commit --allow-empty -m "[OpenShift Pipeline] $commitMessageTrimmed"
+      git commit --allow-empty -m "[OpenShift Pipeline] $(params.commitMessage)"
       git push origin $(params.gitRepositoryRevision)
 
       sleep 5m
