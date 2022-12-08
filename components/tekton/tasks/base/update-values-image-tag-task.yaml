@@ -48,19 +48,3 @@ spec:
       imageTag=$(params.imageTag)
       imageTagTrimmed=$(echo "${imageTag//[$'\t\r\n']}")
       sed -i "s/tag: ".*"/tag: "$imageTagTrimmed"/" ./$(params.filePath)/$(params.fileName)
-      
-  # - name: commit-push-changes
-  #   image: alpine/git:v2.26.2
-  #   workingDir: "/workspace/repository"
-  #   volumeMounts:
-  #   - name: repository
-  #     mountPath: /workspace/repository
-  #   script: |
-  #     #!/usr/bin/env sh
-  #     set -e
-
-  #     git config --global user.email "tekton@tekton.dev"
-  #     git config --global user.name "OpenShift Pipeline"
-  #     git add .
-  #     git commit --allow-empty -m "[OpenShift Pipeline] Updating $(params.fileName) image to $(params.image):$(params.imageTag)"
-  #     git push origin "$(params.gitRepositoryRevision)"

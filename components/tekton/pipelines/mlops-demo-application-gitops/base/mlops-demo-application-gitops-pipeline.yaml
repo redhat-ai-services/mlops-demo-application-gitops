@@ -48,10 +48,28 @@ spec:
         value: values.yaml
       - name: filePath
         value: environments/dev/charts/iris-inference-service
-      # - name: directory
-      #   value: app-source
       - name: imageTag
         value: $(tasks.generate-tag.results.image-tag)
+      - name: verbose
+        value: "true"
+      workspaces:
+        - name: source
+          workspace: app-source
+    - name: git-push-repository
+      runAfter:
+      - update-values
+      taskRef:
+        kind: Task
+        name: git-push-repository
+      params:
+      - name: gitRepositoryPath
+        value: environments/dev/charts
+      - name: gitRepositoryName
+        value: iris-inference-service
+      - name: gitRepositoryRevision
+        value: $(params.GIT_REVISION)
+      - name: commitMessage
+        value: "Updating Values.yaml Image tag to $(tasks.generate-tag.results.image-tag)"
       - name: verbose
         value: "true"
       workspaces:

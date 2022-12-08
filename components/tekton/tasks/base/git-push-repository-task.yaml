@@ -1,0 +1,45 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: git-push-repository
+  annotations:
+    tekton.dev/displayName: "Push Local Git Repository to Remote"
+    description: |
+      Pushes a specified git repository with parameter commit message to its remote origin
+spec:
+  params:
+  - name: gitRepositoryPath
+    description: Path of the repository to be pushed
+    type: string
+  - name: gitRepositoryName
+    description: Name of the repository to be pushed
+    type: string
+  - name: gitRepositoryRevision
+    description: Branch to push to
+    type: string
+  - name: commitMessage
+    description: The git commit message
+    type: string
+  - name: verbose
+    description: Log the commands used during execution
+    type: string
+    default: "true"
+  workspaces:
+    - name: source
+  steps:
+  - name: update-yaml
+    image: alpine/git:v2.26.2
+    workingDir: $(workspaces.source.path)
+    script: |
+      #!/usr/bin/env sh
+      set -e
+
+      if [[ "$(params.verbose)" == "true" ]] ; then
+        echo "**** Pushing $(params.gitRepositoryName) repository branch $(params.gitRepositoryRevision) to remote origin"
+      fi
+
+      git config --global user.email "tekton@tekton.dev"
+      git config --global user.name "OpenShift Pipeline"
+      cd ./$(params.gitRepositoryPath)/$(params.gitRepositoryName)
+      git commit --allow-empty -m "[OpenShift Pipeline] $(params.commitMessage)"
+      git push origin "$(params.gitRepositoryRevision)"

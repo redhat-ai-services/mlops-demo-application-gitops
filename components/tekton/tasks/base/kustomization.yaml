@@ -5,4 +5,5 @@ resources:
   - generate-tag-task.yaml
   - tox-task.yaml
   - update-values-image-tag-task.yaml
+  - git-push-repository-task.yaml
   
