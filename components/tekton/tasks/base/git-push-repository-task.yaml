@@ -1,24 +1,3 @@
-# # Sample Secret Template
-# apiVersion: v1
-# kind: Secret
-# metadata:
-#   name: mlops-demo-application-gitops-github-ssh-key
-#   annotations:
-#     tekton.dev/git-0: github.com
-# data:
-#   ssh-privatekey: >-
-#     <SSH_KEY_VALUE>
-#   known_hosts: >-
-#     <SSH_KEY_VALUE>
-# type: kubernetes.io/ssh-auth
-# ---
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: ssh-key-service-account
-secrets:
-- name: mlops-demo-application-gitops-github-ssh-key
----
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
@@ -28,7 +7,6 @@ metadata:
     description: |
       Pushes a specified git repository with parameter commit message to its remote origin
 spec:
-  serviceAccountName: ssh-key-service-account
   params:
   - name: gitRepositoryPath
     description: Path of the repository to be pushed
@@ -57,7 +35,7 @@ spec:
   workspaces:
     - name: source
   steps:
-  - name: update-yaml
+  - name: push-repository
     # env:
     # - name: GITHUB_SSH_KEY
     #   valueFrom:
@@ -85,3 +63,5 @@ spec:
       git remote set-url origin git@github.com:rh-intelligent-application-practice/mlops-demo-application-gitops.git
 
       git push origin
+
+      sleep 5m
