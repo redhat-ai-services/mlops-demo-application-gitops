@@ -16,7 +16,6 @@ spec:
       metadata:
         generateName: mlops-demo-application-gitops-
       spec:
-        serviceAccountName: ssh-key-service-account
         params:
           - name: GIT_REPO
             value: >-
