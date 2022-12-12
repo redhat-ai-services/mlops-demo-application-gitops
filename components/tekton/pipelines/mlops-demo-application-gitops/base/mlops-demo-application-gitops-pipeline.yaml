@@ -13,7 +13,8 @@ spec:
       default: main
       description: The application git repository revision
   workspaces:
-    - name: app-source
+    # - name: app-source
+    - name: ssh-credentials
   tasks:
     # - name: git-clone
     #   taskRef:

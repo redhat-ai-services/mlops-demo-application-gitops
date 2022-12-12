@@ -26,17 +26,17 @@ spec:
           name: mlops-demo-application-gitops
         resources: []
         workspaces:
-          - name: app-source
-            volumeClaimTemplate:
-              metadata:
-                labels:
-                  tekton.dev/pipeline: mlops-demo-application-gitops
-              spec:
-                accessModes:
-                  - ReadWriteOnce
-                resources:
-                  requests:
-                    storage: 1Gi
+          # - name: app-source
+          #   volumeClaimTemplate:
+          #     metadata:
+          #       labels:
+          #         tekton.dev/pipeline: mlops-demo-application-gitops
+          #     spec:
+          #       accessModes:
+          #         - ReadWriteOnce
+          #       resources:
+          #         requests:
+          #           storage: 1Gi
           - name: ssh-credentials
             secret:
               secretName: mlops-demo-application-gitops-github-ssh-key
