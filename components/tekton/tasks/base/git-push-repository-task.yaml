@@ -1,3 +1,24 @@
+# # Sample Secret Template
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: mlops-demo-application-gitops-github-ssh-key
+#   annotations:
+#     tekton.dev/git-0: github.com
+# data:
+#   ssh-privatekey: >-
+#     <SSH_KEY_VALUE>
+#   known_hosts: >-
+#     <SSH_KEY_VALUE>
+# type: kubernetes.io/ssh-auth
+# ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ssh-key-service-account
+secrets:
+- name: mlops-demo-application-gitops-github-ssh-key
+---
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
@@ -7,6 +28,7 @@ metadata:
     description: |
       Pushes a specified git repository with parameter commit message to its remote origin
 spec:
+  serviceAccountName: ssh-key-service-account
   params:
   - name: gitRepositoryPath
     description: Path of the repository to be pushed
@@ -24,10 +46,24 @@ spec:
     description: Log the commands used during execution
     type: string
     default: "true"
+  # - name: githubSSHSecret
+  #   description: The name of the secret containing the Github SSH Private Key
+  #   type: string
+  #   default: "mlops-demo-application-gitops-github-key"
+  # - name: githubSSHSecretKey
+  #   description: The name of the key in the secret which contains the SSH Private Key value
+  #   type: string
+  #   default: "ssh-privatekey"
   workspaces:
     - name: source
   steps:
   - name: update-yaml
+    # env:
+    # - name: GITHUB_SSH_KEY
+    #   valueFrom:
+    #     secretKeyRef:
+    #       name: $(params.githubSSHSecret)
+    #       key: $(params.githubSSHSecretKey)
     image: alpine/git:v2.26.2
     workingDir: $(workspaces.source.path)
     script: |
@@ -42,15 +78,10 @@ spec:
       git config --global user.name "OpenShift Pipeline"
       cd ./$(params.gitRepositoryPath)/$(params.gitRepositoryName)
 
-      echo "BRANCH: "
-      echo $(git branch)
-      echo "REMOTE: "
-      echo $(git remote -v)
-
       git switch $(params.gitRepositoryRevision)
       git add .
       git commit --allow-empty -m "[OpenShift Pipeline] $(params.commitMessage)"
-      git push
-      #git push git push origin HEAD:$(params.gitRepositoryRevision)
+      
+      git remote set-url origin git@github.com:rh-intelligent-application-practice/mlops-demo-application-gitops.git
 
-      sleep 5m
+      git push origin
