@@ -57,12 +57,15 @@ spec:
     #     - name: source
     #       workspace: app-source
     - name: git-push-repository
-      # runAfter:
+      runAfter:
+        - generate-tag
       # - update-values
       taskRef:
         kind: Task
         name: git-push-repository
       params:
+      - name: imageTag
+        value: $(tasks.generate-tag.results.image-tag)
       - name: GitUrl
         value: $(params.GIT_REPO)
       - name: gitRevision

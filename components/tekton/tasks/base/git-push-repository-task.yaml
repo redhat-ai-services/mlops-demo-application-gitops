@@ -71,6 +71,7 @@ spec:
       git config --global user.email "tekton@tekton.dev"
       git config --global user.name "OpenShift Pipeline"
 
+      echo $(params.imageTag)
       echo "DIR:"
       echo "$PWD"
 
