@@ -8,6 +8,21 @@ metadata:
       Pushes a specified git repository with parameter commit message to its remote origin
 spec:
   params:
+  - name: GitUrl
+    description: The application git repository url
+    type: string
+  - name: gitRevision
+    description: The application git repository revision
+    type: string
+  - name: filePath
+    description: Path of the file to be updated
+    type: string
+  - name: fileName
+    description: Name of the file to be updated
+    type: string
+  - name: imageTag
+    description: The image tag to be written into the YAML
+    type: string
   - name: gitRepositoryPath
     description: Path of the repository to be pushed
     type: string
@@ -32,47 +47,51 @@ spec:
     description: The name of the key in the secret which contains the SSH Private Key value
     type: string
     default: "ssh-privatekey"
-  volumes:
-    - name: ssh-key
-      secret:
-        secretName: $(params.githubSSHSecret)
+  # volumes:
+  #   - name: ssh-key
+  #     secret:
+  #       secretName: $(params.githubSSHSecret)
   workspaces:
-    - name: source
+    # - name: source
+    - name: ssh-source
   steps:
   - name: push-repository
-    volumeMounts:
-      - mountPath: "~/.ssh"
-        name: ssh-key
-    env:
-    - name: GITHUB_SSH_KEY
-      valueFrom:
-        secretKeyRef:
-          name: $(params.githubSSHSecret)
-          key: $(params.githubSSHSecretKey)
+    # env:
+    # - name: GITHUB_SSH_KEY
+    #   valueFrom:
+    #     secretKeyRef:
+    #       name: $(params.githubSSHSecret)
+    #       key: $(params.githubSSHSecretKey)
     image: alpine/git:v2.26.2
-    workingDir: $(workspaces.source.path)
+    workingDir: $(workspaces.ssh-source.path)
     script: |
       #!/usr/bin/env sh
       # set -e
+
+      git config --global user.email "tekton@tekton.dev"
+      git config --global user.name "OpenShift Pipeline"
+
+      echo "DIR:"
+      echo "$PWD"
+
+      git clone $(params.GitUrl)
 
       if [[ "$(params.verbose)" == "true" ]] ; then
         echo "**** Pushing $(params.gitRepositoryName) repository branch $(params.gitRepositoryRevision) to remote origin"
       fi
 
-      git config --global user.email "tekton@tekton.dev"
-      git config --global user.name "OpenShift Pipeline"
-      cd ./$(params.gitRepositoryPath)/$(params.gitRepositoryName)
+      # cd ./$(params.gitRepositoryPath)/$(params.gitRepositoryName)
 
-      git switch $(params.gitRepositoryRevision)
-      git add .
-      git commit --allow-empty -m "[OpenShift Pipeline] $(params.commitMessage)"
+      # git switch $(params.gitRepositoryRevision)
+      # git add .
+      # git commit --allow-empty -m "[OpenShift Pipeline] $(params.commitMessage)"
       
-      git remote set-url origin git@github.com:rh-intelligent-application-practice/mlops-demo-application-gitops.git
+      # git remote set-url origin git@github.com:rh-intelligent-application-practice/mlops-demo-application-gitops.git
 
-      apk add --update openssl
-      echo $GITHUB_SSH_KEY > ~/.ssh/id_rsa
-      ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
+      # apk add --update openssl
+      # echo $GITHUB_SSH_KEY > ~/.ssh/id_rsa
+      # ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
 
-      git push origin
+      # git push origin
 
       sleep 5m

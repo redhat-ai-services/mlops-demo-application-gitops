@@ -15,20 +15,20 @@ spec:
   workspaces:
     - name: app-source
   tasks:
-    - name: git-clone
-      taskRef:
-        kind: ClusterTask
-        name: git-clone
-      params:
-      - name: url
-        value: $(params.GIT_REPO)
-      - name: revision
-        value: $(params.GIT_REVISION)
-      - name: deleteExisting
-        value: 'true'
-      workspaces:
-      - name: output
-        workspace: app-source
+    # - name: git-clone
+    #   taskRef:
+    #     kind: ClusterTask
+    #     name: git-clone
+    #   params:
+    #   - name: url
+    #     value: $(params.GIT_REPO)
+    #   - name: revision
+    #     value: $(params.GIT_REVISION)
+    #   - name: deleteExisting
+    #     value: 'true'
+    #   workspaces:
+    #   - name: output
+    #     workspace: app-source
     - name: generate-tag
       params:
         - name: SHA
@@ -36,32 +36,36 @@ spec:
       taskRef:
         kind: Task
         name: generate-tag
-    - name: update-values
-      runAfter:
-      - git-clone
-      - generate-tag
-      taskRef:
-        kind: Task
-        name: update-values-image-tag
-      params:
-      - name: fileName
-        value: values.yaml
-      - name: filePath
-        value: environments/dev/charts/iris-inference-service
-      - name: imageTag
-        value: $(tasks.generate-tag.results.image-tag)
-      - name: verbose
-        value: "true"
-      workspaces:
-        - name: source
-          workspace: app-source
+    # - name: update-values
+    #   runAfter:
+    #   - git-clone
+    #   - generate-tag
+    #   taskRef:
+    #     kind: Task
+    #     name: update-values-image-tag
+    #   params:
+    #   - name: fileName
+    #     value: values.yaml
+    #   - name: filePath
+    #     value: environments/dev/charts/iris-inference-service
+    #   - name: imageTag
+    #     value: $(tasks.generate-tag.results.image-tag)
+    #   - name: verbose
+    #     value: "true"
+    #   workspaces:
+    #     - name: source
+    #       workspace: app-source
     - name: git-push-repository
-      runAfter:
-      - update-values
+      # runAfter:
+      # - update-values
       taskRef:
         kind: Task
         name: git-push-repository
       params:
+      - name: GitUrl
+        value: $(params.GIT_REPO)
+      - name: gitRevision
+        value: $(params.GIT_REVISION)
       - name: gitRepositoryPath
         value: environments/dev/charts
       - name: gitRepositoryName
@@ -73,5 +77,7 @@ spec:
       - name: verbose
         value: "true"
       workspaces:
-        - name: source
-          workspace: app-source
+        # - name: source
+        #   workspace: app-source
+        - name: ssh-source
+          workspace: ssh-credentials
