@@ -3,7 +3,6 @@ kind: Pipeline
 metadata:
   name: mlops-demo-application-gitops
 spec:
-  serviceAccountName: build-bot
   params:
     - name: GIT_REPO
       type: string
