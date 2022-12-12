@@ -24,24 +24,24 @@ spec:
     description: Log the commands used during execution
     type: string
     default: "true"
-  # - name: githubSSHSecret
-  #   description: The name of the secret containing the Github SSH Private Key
-  #   type: string
-  #   default: "mlops-demo-application-gitops-github-key"
-  # - name: githubSSHSecretKey
-  #   description: The name of the key in the secret which contains the SSH Private Key value
-  #   type: string
-  #   default: "ssh-privatekey"
+  - name: githubSSHSecret
+    description: The name of the secret containing the Github SSH Private Key
+    type: string
+    default: "mlops-demo-application-gitops-github-ssh-key"
+  - name: githubSSHSecretKey
+    description: The name of the key in the secret which contains the SSH Private Key value
+    type: string
+    default: "ssh-privatekey"
   workspaces:
     - name: source
   steps:
   - name: push-repository
-    # env:
-    # - name: GITHUB_SSH_KEY
-    #   valueFrom:
-    #     secretKeyRef:
-    #       name: $(params.githubSSHSecret)
-    #       key: $(params.githubSSHSecretKey)
+    env:
+    - name: GITHUB_SSH_KEY
+      valueFrom:
+        secretKeyRef:
+          name: $(params.githubSSHSecret)
+          key: $(params.githubSSHSecretKey)
     image: alpine/git:v2.26.2
     workingDir: $(workspaces.source.path)
     script: |
