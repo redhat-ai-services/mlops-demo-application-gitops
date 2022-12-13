@@ -13,6 +13,4 @@ commonLabels:
 
 resources:
   - mlops-demo-application-gitops-pipeline.yaml
-  - mlops-demo-application-gitops-trigger-template.yaml
-  - mlops-demo-application-gitops-github-ssh-key-sealed-secret.yaml
-  
+  - mlops-demo-application-gitops-trigger-template.yaml  

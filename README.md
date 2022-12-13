@@ -37,7 +37,7 @@ type: kubernetes.io/ssh-auth
 kubeseal --cert=public-key-cert.pem --format=yaml < mlops-demo-application-gitops-github-ssh-key-secret.yaml > mlops-demo-application-gitops-github-ssh-key-sealed-secret.yaml
 ```
 
-4. Apply the Sealed Secret to Your Cluster OR Update the Asset under _components/tekton/pipelines/mlops-demo-application-gitops/base/mlops-demo-application-gitops-github-ssh-key-sealed-secret.yaml_:
+4. Apply the Sealed Secret to Your Cluster:
 ```
 kubectl create -f mlops-demo-application-gitops-github-ssh-key-sealed-secret.yaml
 ```
