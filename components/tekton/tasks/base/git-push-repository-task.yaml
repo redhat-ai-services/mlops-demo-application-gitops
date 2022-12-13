@@ -8,18 +8,6 @@ metadata:
       Pushes a specified git repository with parameter commit message to its remote origin
 spec:
   params:
-  - name: GitUrl
-    description: The application git repository url
-    type: string
-  - name: gitRevision
-    description: The application git repository revision
-    type: string
-  # - name: filePath
-  #   description: Path of the file to be updated
-  #   type: string
-  # - name: fileName
-  #   description: Name of the file to be updated
-  #   type: string
   - name: imageTag
     description: The image tag to be written into the YAML
     type: string
@@ -47,13 +35,8 @@ spec:
     description: The name of the key in the secret which contains the SSH Private Key value
     type: string
     default: "ssh-privatekey"
-  # volumes:
-  #   - name: ssh-key
-  #     secret:
-  #       secretName: $(params.githubSSHSecret)
   workspaces:
     - name: source
-    # - name: ssh-source
   steps:
   - name: push-repository
     env:
@@ -63,7 +46,7 @@ spec:
           name: $(params.githubSSHSecret)
           key: $(params.githubSSHSecretKey)
     image: alpine/git:v2.26.2
-    workingDir: $(workspaces.ssh-source.path)
+    workingDir: $(workspaces.source.path)
     script: |
       #!/usr/bin/env sh
       # set -e
