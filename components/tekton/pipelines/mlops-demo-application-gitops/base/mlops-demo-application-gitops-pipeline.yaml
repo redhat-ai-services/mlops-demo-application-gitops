@@ -64,7 +64,7 @@ spec:
         name: git-push-repository
       params:
       - name: gitRepositoryName
-        value: iris-inference-service
+        value: mlops-demo-application-gitops
       - name: gitRepositoryRevision
         value: $(params.GIT_REVISION)
       - name: commitMessage
@@ -74,5 +74,3 @@ spec:
       workspaces:
         - name: source
           workspace: app-source
-        # - name: ssh-source
-        #   workspace: ssh-credentials
