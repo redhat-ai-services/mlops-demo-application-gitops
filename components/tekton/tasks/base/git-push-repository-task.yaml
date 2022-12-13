@@ -59,8 +59,8 @@ spec:
       mkdir ~/.ssh
 
       echo $GITHUB_SSH_KEY > id_rsa
-      sed -i "s/----- /-----\n/" somefile
-      sed -i "s/ -----/\n-----/" somefile
+      sed -i "s/----- /-----\n/" id_rsa
+      sed -i "s/ -----/\n-----/" id_rsa
       mv id_rsa ~/.ssh/id_rsa
 
       chmod 400 ~/.ssh/id_rsa
