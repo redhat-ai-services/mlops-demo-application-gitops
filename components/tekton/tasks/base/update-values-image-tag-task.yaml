@@ -9,9 +9,6 @@ metadata:
       Uses shared workspace source to access file system to work in.
 spec:
   params:
-  # - name: directory
-  #   description: the directory to work in
-  #   type: string
   - name: filePath
     description: Path of the file to be updated
     type: string
@@ -27,16 +24,13 @@ spec:
     default: "true"
   workspaces:
     - name: source
-  # volumes:
-  # - name: repository
-  #   emptyDir: {}
   steps:
   - name: update-yaml
     image: registry.access.redhat.com/ubi8/ubi-minimal:8.3
     workingDir: $(workspaces.source.path)
-    # volumeMounts:
-    # - name: repository
-    #   mountPath: /workspace/repository
+    volumeMounts:
+    - name: repository
+      mountPath: /workspace/repository
     script: |
       #!/usr/bin/env sh
       set -e
