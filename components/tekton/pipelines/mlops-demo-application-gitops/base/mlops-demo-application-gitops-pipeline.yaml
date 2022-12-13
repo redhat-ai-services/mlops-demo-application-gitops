@@ -58,7 +58,6 @@ spec:
           workspace: app-source
     - name: git-push-repository
       runAfter:
-        - generate-tag
         - update-values
       taskRef:
         kind: Task
