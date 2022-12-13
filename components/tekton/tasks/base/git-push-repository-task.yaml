@@ -45,26 +45,28 @@ spec:
       #!/usr/bin/env sh
       # set -e
 
-      git config --global user.email "tekton@tekton.dev"
-      git config --global user.name "OpenShift Pipeline"
       if [[ "$(params.verbose)" == "true" ]] ; then
         echo "**** Pushing $(params.gitRepositoryName) repository branch $(params.gitRepositoryRevision) to remote origin"
       fi
+
+      git config --global user.email "tekton@tekton.dev"
+      git config --global user.name "OpenShift Pipeline"
 
       git switch $(params.gitRepositoryRevision)
       git add .
       git commit --allow-empty -m "[OpenShift Pipeline] $(params.commitMessage)"
       git remote set-url origin git@github.com:rh-intelligent-application-practice/mlops-demo-application-gitops.git
-      apk add --update openssl
-      mkdir ~/.ssh
+      
+      # apk add --update openssl
+      # mkdir ~/.ssh
 
+      # Add Private Key from Secret
       echo $GITHUB_SSH_KEY > id_rsa
       sed -i "s/----- /-----\n/" id_rsa
       sed -i "s/ -----/\n-----/" id_rsa
       mv id_rsa ~/.ssh/id_rsa
-
       chmod 400 ~/.ssh/id_rsa
       ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
       GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa' git push origin $(params.gitRepositoryRevision)
+
       git push
-      sleep 15m
