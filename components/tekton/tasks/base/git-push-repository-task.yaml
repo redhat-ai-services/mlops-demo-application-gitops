@@ -14,12 +14,12 @@ spec:
   - name: gitRevision
     description: The application git repository revision
     type: string
-  - name: filePath
-    description: Path of the file to be updated
-    type: string
-  - name: fileName
-    description: Name of the file to be updated
-    type: string
+  # - name: filePath
+  #   description: Path of the file to be updated
+  #   type: string
+  # - name: fileName
+  #   description: Name of the file to be updated
+  #   type: string
   - name: imageTag
     description: The image tag to be written into the YAML
     type: string
