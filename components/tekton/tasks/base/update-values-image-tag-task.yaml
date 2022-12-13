@@ -5,37 +5,37 @@ metadata:
   annotations:
     tekton.dev/displayName: "Update Image Tag in Helm Values File"
     description: |
-      Updates the Image Tag in Values file located at {params.filePath}.{params.fileName}. 
+      Updates the Image Tag in Values file located at {params.filePath}.{params.fileName}.
       Uses shared workspace source to access file system to work in.
 spec:
   params:
-  - name: filePath
-    description: Path of the file to be updated
-    type: string
-  - name: fileName
-    description: Name of the file to be updated
-    type: string
-  - name: imageTag
-    description: The image tag to be written into the YAML
-    type: string
-  - name: verbose
-    description: Log the commands used during execution
-    type: string
-    default: "true"
+    - name: filePath
+      description: Path of the file to be updated
+      type: string
+    - name: fileName
+      description: Name of the file to be updated
+      type: string
+    - name: imageTag
+      description: The image tag to be written into the YAML
+      type: string
+    - name: verbose
+      description: Log the commands used during execution
+      type: string
+      default: "true"
   workspaces:
     - name: source
   steps:
-  - name: update-yaml
-    image: registry.access.redhat.com/ubi8/ubi-minimal:8.3
-    workingDir: $(workspaces.source.path)
-    script: |
-      #!/usr/bin/env sh
-      set -e
+    - name: update-yaml
+      image: registry.access.redhat.com/ubi8/ubi-minimal:8.3
+      workingDir: $(workspaces.source.path)
+      script: |
+        #!/usr/bin/env sh
+        set -e
 
-      if [[ "$(params.verbose)" == "true" ]] ; then
-        echo "**** Updating $(params.fileName) image tag to $(params.imageTag)"
-      fi
-      
-      imageTag=$(params.imageTag)
-      imageTagTrimmed=$(echo "${imageTag//[$'\t\r\n']}")
-      sed -i "s#tag: ".*"#tag: \"$imageTagTrimmed\"#" ./$(params.filePath)/$(params.fileName)
+        if [[ "$(params.verbose)" == "true" ]] ; then
+          echo "**** Updating $(params.fileName) image tag to $(params.imageTag)"
+        fi
+
+        imageTag=$(params.imageTag)
+        imageTagTrimmed=$(echo "${imageTag//[$'\t\r\n']}")
+        sed -i "s#tag: ".*"#tag: \"$imageTagTrimmed\"#" ./$(params.filePath)/$(params.fileName)

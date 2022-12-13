@@ -6,4 +6,3 @@ resources:
   - tox-task.yaml
   - update-values-image-tag-task.yaml
   - git-push-repository-task.yaml
-  
