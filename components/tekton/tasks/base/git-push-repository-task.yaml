@@ -58,6 +58,7 @@ spec:
       apk add --update openssl
       mkdir ~/.ssh
       echo $GITHUB_SSH_KEY > ~/.ssh/id_rsa
+      chmod 400 ~/.ssh/id_rsa
       ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
       GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa' git push origin $(params.gitRepositoryRevision)
       git push
