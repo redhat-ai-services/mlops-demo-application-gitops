@@ -63,12 +63,6 @@ spec:
         kind: Task
         name: git-push-repository
       params:
-      - name: imageTag
-        value: $(tasks.generate-tag.results.image-tag)
-      - name: GitUrl
-        value: $(params.GIT_REPO)
-      - name: gitRevision
-        value: $(params.GIT_REVISION)
       - name: gitRepositoryPath
         value: environments/dev/charts
       - name: gitRepositoryName
