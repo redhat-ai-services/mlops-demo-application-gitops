@@ -21,15 +21,15 @@ spec:
         kind: ClusterTask
         name: git-clone
       params:
-      - name: url
-        value: $(params.GIT_REPO)
-      - name: revision
-        value: $(params.GIT_REVISION)
-      - name: deleteExisting
-        value: 'true'
+        - name: url
+          value: $(params.GIT_REPO)
+        - name: revision
+          value: $(params.GIT_REVISION)
+        - name: deleteExisting
+          value: 'true'
       workspaces:
-      - name: output
-        workspace: app-source
+        - name: output
+          workspace: app-source
     - name: generate-tag
       params:
         - name: SHA
@@ -39,20 +39,20 @@ spec:
         name: generate-tag
     - name: update-values
       runAfter:
-      - git-clone
-      - generate-tag
+        - git-clone
+        - generate-tag
       taskRef:
         kind: Task
         name: update-values-image-tag
       params:
-      - name: fileName
-        value: values.yaml
-      - name: filePath
-        value: environments/dev/charts/iris-inference-service
-      - name: imageTag
-        value: $(tasks.generate-tag.results.image-tag)
-      - name: verbose
-        value: "true"
+        - name: fileName
+          value: values.yaml
+        - name: filePath
+          value: environments/dev/charts/iris-inference-service
+        - name: imageTag
+          value: $(tasks.generate-tag.results.image-tag)
+        - name: verbose
+          value: "true"
       workspaces:
         - name: source
           workspace: app-source
@@ -63,14 +63,14 @@ spec:
         kind: Task
         name: git-push-repository
       params:
-      - name: gitRepositoryName
-        value: mlops-demo-application-gitops
-      - name: gitRepositoryRevision
-        value: $(params.GIT_REVISION)
-      - name: commitMessage
-        value: "Updating Values YAML Image tag"
-      - name: verbose
-        value: "true"
+        - name: gitRepositoryName
+          value: mlops-demo-application-gitops
+        - name: gitRepositoryRevision
+          value: $(params.GIT_REVISION)
+        - name: commitMessage
+          value: "Updating Values YAML Image tag"
+        - name: verbose
+          value: "true"
       workspaces:
         - name: source
           workspace: app-source
