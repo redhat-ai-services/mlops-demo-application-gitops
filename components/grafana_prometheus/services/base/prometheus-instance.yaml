@@ -4,7 +4,8 @@ metadata:
   name: prometheus
   labels:
     prometheus: k8s
-    seldon-app: iris-inference-service
+    seldon-app: iris-inference-service-iris-inference-service
+
 spec:
   serviceAccountName: prometheus-k8s
   serviceMonitorSelector: {}
