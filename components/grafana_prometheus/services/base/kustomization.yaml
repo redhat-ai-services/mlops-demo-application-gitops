@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: mlops-demo-dev
+
+resources:
+  - prometheus-instance.yaml
+  - prometheus-route.yaml
+  - rest-seldon-model-servicemonitor.yaml
+  - grafana-instance.yaml
+  - grafana-prometheus-datasource.yaml
+  - prediction-analytics-seldon-core-1.2.2.yaml

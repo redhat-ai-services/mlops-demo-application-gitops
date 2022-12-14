@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    seldon-app: iris-inference-service-iris-inference-service
+  name: iris-inference-service
+  namespace: mlops-demo-dev
+spec:
+  endpoints:
+    - interval: 30s
+      path: /prometheus
+      port: http
+  selector:
+    matchLabels:
+      seldon-app: iris-inference-service-iris-inference-service
