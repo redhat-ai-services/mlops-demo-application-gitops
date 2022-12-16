@@ -48,5 +48,4 @@ spec:
         else
            pip install tox
         fi
-        tox --parallel auto .
         # tox $(inputs.params.ARGS) $(inputs.params.SOURCE_PATH)
