@@ -111,7 +111,7 @@ spec:
             oc tag \
             $(params.APP_NAME)@$(tasks.build.results.IMAGE_DIGEST) \
             $(params.APP_NAME):$(tasks.generate-tag.results.image-tag)
-    - name: git-clone
+    - name: fetch-gitops-repository
       runAfter:
         - tag-image
       taskRef:
@@ -129,8 +129,7 @@ spec:
           workspace: workspace
     - name: update-values
       runAfter:
-        - git-clone
-        - generate-tag
+        - fetch-gitops-repository
       taskRef:
         kind: Task
         name: update-values-image-tag
