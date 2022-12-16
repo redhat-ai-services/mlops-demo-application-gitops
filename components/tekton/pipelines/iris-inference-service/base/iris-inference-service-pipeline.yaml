@@ -137,7 +137,7 @@ spec:
         - name: fileName
           value: $(params.GITOPS_FILE)
         - name: filePath
-          value:  $(params.GITOPS_PATH)
+          value: $(params.GITOPS_PATH)
         - name: imageTag
           value: $(tasks.generate-tag.results.image-tag)
         - name: verbose
