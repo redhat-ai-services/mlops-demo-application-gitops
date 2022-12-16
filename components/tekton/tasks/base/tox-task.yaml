@@ -20,9 +20,6 @@ spec:
       description: The used Python version, more precisely the tag for the Python image
       type: string
       default: "latest"
-    - name: SOURCE_PATH
-      description: The path to the source code
-      default: "."
     - name: ARGS
       description: The additional arguments to be used with tox
       type: string
@@ -48,4 +45,5 @@ spec:
         else
            pip install tox
         fi
+        echo "Executing tests via tox..."
         tox $(inputs.params.ARGS)
