@@ -36,10 +36,6 @@ spec:
       type: string
       default: environments/dev/charts/iris-inference-service
       description: The location of the file to patch in the GitOps repo
-    - name: GITOPS_FILE
-      type: string
-      default: values.yaml
-      description: The file to patch in the GitOps repo
   tasks:
     - name: fetch-repository
       params:
@@ -135,7 +131,7 @@ spec:
         name: update-values-image-tag
       params:
         - name: fileName
-          value: $(params.GITOPS_FILE)
+          value: values.yaml
         - name: filePath
           value: $(params.GITOPS_PATH)
         - name: imageTag
