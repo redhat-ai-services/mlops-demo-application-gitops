@@ -48,4 +48,4 @@ spec:
         else
            pip install tox
         fi
-        tox $(inputs.params.ARGS) $(inputs.params.SOURCE_PATH)
+        tox $(inputs.params.ARGS)
