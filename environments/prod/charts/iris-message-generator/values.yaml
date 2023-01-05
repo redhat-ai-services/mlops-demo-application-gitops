@@ -1,1 +1,2 @@
-fullnameOverride: "iris-message-generator"
+iris-message-generator:
+  fullnameOverride: "iris-message-generator"
