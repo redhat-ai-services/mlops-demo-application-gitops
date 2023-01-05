@@ -9,24 +9,24 @@ spec:
           - cluster: local
             url: https://kubernetes.default.svc
             values:
-              name: iris-inference-service-dev
+              name: iris-message-generator-dev
               namespace: mlops-demo-dev
               project: mlops-demo-dev
-              path: environments/dev/charts/iris-inference-service
+              path: environments/dev/charts/iris-message-generator
           - cluster: local
             url: https://kubernetes.default.svc
             values:
-              name: iris-inference-service-test
+              name: iris-message-generator-test
               namespace: mlops-demo-test
               project: mlops-demo-test
-              path: environments/test/charts/iris-inference-service
+              path: environments/test/charts/iris-message-generator
           - cluster: local
             url: https://kubernetes.default.svc
             values:
-              name: iris-inference-service-prod
+              name: iris-message-generator-prod
               namespace: mlops-demo-prod
               project: mlops-demo-prod
-              path: environments/prod/charts/iris-inference-service
+              path: environments/prod/charts/iris-message-generator
   template:
     metadata:
       name: '{{values.name}}'
