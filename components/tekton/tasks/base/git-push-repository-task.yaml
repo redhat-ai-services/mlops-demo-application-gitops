@@ -62,6 +62,8 @@ spec:
 
         # DEBUGGING
         pwd
+        echo "USER IS: "
+        whoami
 
         # Add Private Key from Secret
         echo $GITHUB_SSH_KEY > id_rsa
