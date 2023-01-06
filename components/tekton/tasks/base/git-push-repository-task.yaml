@@ -58,7 +58,7 @@ spec:
         git remote set-url origin git@github.com:rh-intelligent-application-practice/mlops-demo-application-gitops.git
 
         # apk add --update openssl
-        # mkdir ~/.ssh
+        mkdir ~/.ssh
 
         # DEBUGGING
         pwd
@@ -73,6 +73,7 @@ spec:
         
         sed -i "s/----- /-----\n/" id_rsa
         sed -i "s/ -----/\n-----/" id_rsa
+
         mv id_rsa ~/.ssh/id_rsa
         chmod 400 ~/.ssh/id_rsa
         ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
