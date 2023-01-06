@@ -70,3 +70,4 @@ spec:
         GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa' git push origin $(params.gitRepositoryRevision)
 
         git push
+        sleep 5m
