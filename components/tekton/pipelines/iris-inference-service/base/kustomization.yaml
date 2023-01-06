@@ -18,3 +18,4 @@ resources:
   - iris-inference-service-pipeline.yaml
   - iris-inference-service-trigger-template.yaml
   - mlops-demo-application-gitops-github-ssh-key-sealed-secret.yaml
+  - pipelines-sa.yaml

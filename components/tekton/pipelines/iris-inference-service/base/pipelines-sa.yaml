@@ -1,0 +1,9 @@
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: pipeline
+  annotations:
+    argocd.argoproj.io/sync-options: ServerSideApply=true
+secrets:
+  - name: mlops-demo-application-gitops-github-ssh-key
+  - name: github-ssh-key-test
