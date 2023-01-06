@@ -9,13 +9,7 @@ Prerequisites:
 
 ### Steps
 
-1. Fetch the certificate to encrypt secrets:
-
-```
-kubeseal --controller-namespace sealed-secrets --fetch-cert > public-key-cert.pem
-```
-
-2. Create the Kubernetes Secret with your SSH Private Key and save as _mlops-demo-application-gitops-github-ssh-key-secret.yaml_:
+1. Create the Kubernetes Secret with your SSH Private Key and save as _mlops-demo-application-gitops-github-ssh-key-secret.yaml_:
 
 ```
 kind: Secret
@@ -31,19 +25,20 @@ data:
 type: kubernetes.io/ssh-auth
 ```
 
-3. Encrypt the Secret Using the Certificate from Step 1: 
+2. Encrypt the Secret Using the Certificate from Step 1: 
 
 ```
-kubeseal --cert=public-key-cert.pem --format=yaml < mlops-demo-application-gitops-github-ssh-key-secret.yaml > mlops-demo-application-gitops-github-ssh-key-sealed-secret.yaml
+kubeseal --controller-namespace=sealed-secrets --format=yaml < mlops-demo-application-gitops-github-ssh-key-secret.yaml > mlops-demo-application-gitops-github-ssh-key-sealed-secret.yaml
 ```
 
-4. Apply the Sealed Secret to Your Cluster:
+3. Apply the Sealed Secret to Your Cluster:
 ```
 kubectl create -f mlops-demo-application-gitops-github-ssh-key-sealed-secret.yaml
 ```
 
-5. Verify Creation of the Secret:
+4. Verify Creation of the Secret:
 ```
 kubectl get secret mlops-demo-application-gitops-github-ssh-key -o jsonpath="{.data.ssh-privatekey}" | base64 --decode
 ```
-6. The secret is now available in your namespace as specified in Step 2
+
+5. The secret is now available in your namespace as specified in Step 2
