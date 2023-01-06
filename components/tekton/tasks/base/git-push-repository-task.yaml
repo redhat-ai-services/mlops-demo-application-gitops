@@ -39,7 +39,6 @@ spec:
             secretKeyRef:
               name: $(params.githubSSHSecret)
               key: $(params.githubSSHSecretKey)
-      
       image: alpine/git:v2.26.2
       workingDir: $(workspaces.source.path)
       script: |
@@ -63,7 +62,7 @@ spec:
 
         # Add Private Key from Secret
         echo $GITHUB_SSH_KEY > id_rsa
-        
+
         sed -i "s/----- /-----\n/" id_rsa
         sed -i "s/ -----/\n-----/" id_rsa
 
