@@ -38,4 +38,4 @@ spec:
 
         imageTag=$(params.imageTag)
         imageTagTrimmed=$(echo "${imageTag//[$'\t\r\n']}")
-        sed -i "s#tag: ".*"#tag: \"$imageTagTrimmed\"#" ./$(params.filePath)/$(params.fileName)
+        sed -i "s#tag: ".*"#tag: \"$imageTag\"#" ./$(params.filePath)/$(params.fileName)
