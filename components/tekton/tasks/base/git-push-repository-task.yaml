@@ -60,8 +60,15 @@ spec:
         # apk add --update openssl
         # mkdir ~/.ssh
 
+        # DEBUGGING
+        pwd
+
         # Add Private Key from Secret
         echo $GITHUB_SSH_KEY > id_rsa
+
+        # DEBUGGING
+        ls -lia
+        
         sed -i "s/----- /-----\n/" id_rsa
         sed -i "s/ -----/\n-----/" id_rsa
         mv id_rsa ~/.ssh/id_rsa
@@ -70,4 +77,4 @@ spec:
         GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa' git push origin $(params.gitRepositoryRevision)
 
         git push
-        sleep 5m
+        sleep 30m
