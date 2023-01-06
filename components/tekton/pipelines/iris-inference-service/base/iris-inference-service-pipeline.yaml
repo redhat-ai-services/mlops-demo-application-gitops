@@ -57,8 +57,6 @@ spec:
       runAfter:
         - fetch-repository
       params:
-        - name: SOURCE_PATH
-          value: $(params.PATH_CONTEXT)
         - name: PYTHON
           value: $(params.VERSION)
       taskRef:
