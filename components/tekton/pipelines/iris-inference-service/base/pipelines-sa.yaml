@@ -6,4 +6,3 @@ metadata:
     argocd.argoproj.io/sync-options: ServerSideApply=true
 secrets:
   - name: mlops-demo-application-gitops-github-ssh-key
-  - name: github-ssh-key-test
