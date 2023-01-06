@@ -58,27 +58,19 @@ spec:
         git commit --allow-empty -m "[OpenShift Pipeline] $(params.commitMessage)"
         git remote set-url origin git@github.com:rh-intelligent-application-practice/mlops-demo-application-gitops.git
 
-        # apk add --update openssl
+        # # apk add --update openssl
         # mkdir ~/.ssh
 
-        # DEBUGGING
-        pwd
-        echo "USER IS: "
-        whoami
-
-        # Add Private Key from Secret
-        echo $GITHUB_SSH_KEY > id_rsa
-
-        # DEBUGGING
-        ls -lia
+        # # Add Private Key from Secret
+        # echo $GITHUB_SSH_KEY > id_rsa
         
-        sed -i "s/----- /-----\n/" id_rsa
-        sed -i "s/ -----/\n-----/" id_rsa
+        # sed -i "s/----- /-----\n/" id_rsa
+        # sed -i "s/ -----/\n-----/" id_rsa
 
-        mv id_rsa ~/.ssh/id_rsa
-        chmod 400 ~/.ssh/id_rsa
-        ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
-        GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa' git push origin $(params.gitRepositoryRevision)
+        # mv id_rsa ~/.ssh/id_rsa
+        # chmod 400 ~/.ssh/id_rsa
+        # # ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
+        # GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa' git push origin $(params.gitRepositoryRevision)
 
         git push
         sleep 30m
