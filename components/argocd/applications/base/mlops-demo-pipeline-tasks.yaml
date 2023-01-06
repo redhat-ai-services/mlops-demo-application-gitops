@@ -4,9 +4,9 @@ metadata:
   name: mlops-demo-pipeline-tasks
 spec:
   destination:
-    namespace: mlops-demo-gitops
+    namespace: mlops-demo-pipelines
     server: https://kubernetes.default.svc
-  project: default
+  project: mlops-demo-pipelines
   source:
     path: components/tekton/tasks/overlays/default/
     repoURL: patch-me-see-tenant-overlays
