@@ -30,4 +30,4 @@ spec:
 
         tag=${sha}-${model_version}-${date}
 
-        echo ${tag} | tee $(results.image-tag.path)
+        echo -n ${tag} | tee $(results.image-tag.path)
