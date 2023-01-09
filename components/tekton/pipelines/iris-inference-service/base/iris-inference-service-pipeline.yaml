@@ -122,6 +122,7 @@ spec:
     - name: update-dev-image
       runAfter:
         - fetch-gitops-repository
+        - tag-image
       taskRef:
         kind: Task
         name: update-values-image-tag
