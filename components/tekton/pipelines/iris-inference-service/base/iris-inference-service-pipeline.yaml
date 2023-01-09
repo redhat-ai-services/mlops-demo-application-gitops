@@ -37,7 +37,7 @@ spec:
       default: environments/dev/charts/iris-inference-service
       description: The location of the file to patch in the GitOps repo
   tasks:
-    - name: fetch-repository
+    - name: fetch-sourcecode-repository
       params:
         - name: url
           value: $(params.GIT_REPO)
@@ -52,7 +52,7 @@ spec:
         name: git-clone
       workspaces:
         - name: output
-          workspace: workspace
+          workspace: sourcecode-workspace
     - name: test
       runAfter:
         - fetch-repository
@@ -64,7 +64,7 @@ spec:
         name: tox
       workspaces:
         - name: source
-          workspace: workspace
+          workspace: sourcecode-workspace
     - name: generate-tag
       runAfter:
         - test
@@ -91,7 +91,7 @@ spec:
         name: s2i-python
       workspaces:
         - name: source
-          workspace: workspace
+          workspace: sourcecode-workspace
     - name: tag-image
       runAfter:
         - generate-tag
@@ -106,8 +106,6 @@ spec:
             $(params.APP_NAME)@$(tasks.build.results.IMAGE_DIGEST) \
             $(params.APP_NAME):$(tasks.generate-tag.results.image-tag)
     - name: fetch-gitops-repository
-      runAfter:
-        - tag-image
       taskRef:
         kind: ClusterTask
         name: git-clone
@@ -120,7 +118,7 @@ spec:
           value: 'true'
       workspaces:
         - name: output
-          workspace: workspace
+          workspace: gitops-workspace
     - name: update-values
       runAfter:
         - fetch-gitops-repository
@@ -138,8 +136,8 @@ spec:
           value: "true"
       workspaces:
         - name: source
-          workspace: workspace
-    - name: git-push-repository
+          workspace: gitops-workspace
+    - name: push-gitops-repository
       runAfter:
         - update-values
       taskRef:
@@ -156,6 +154,7 @@ spec:
           value: "true"
       workspaces:
         - name: source
-          workspace: workspace
+          workspace: gitops-workspace
   workspaces:
-    - name: workspace
+    - name: sourcecode-workspace
+    - name: gitops-workspace

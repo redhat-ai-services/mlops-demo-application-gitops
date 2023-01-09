@@ -35,7 +35,7 @@ spec:
           name: iris-inference-service
         resources: []
         workspaces:
-          - name: workspace
+          - name: sourcecode-workspace
             volumeClaimTemplate:
               metadata:
                 labels:
@@ -46,3 +46,14 @@ spec:
                 resources:
                   requests:
                     storage: 5Gi
+          - name: gitops-workspace
+            volumeClaimTemplate:
+              metadata:
+                labels:
+                  tekton.dev/pipeline: iris-inference-service
+              spec:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 1Gi
