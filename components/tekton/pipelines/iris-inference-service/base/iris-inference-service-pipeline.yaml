@@ -55,7 +55,7 @@ spec:
           workspace: sourcecode-workspace
     - name: test
       runAfter:
-        - fetch-repository
+        - fetch-sourcecode-repository
       params:
         - name: PYTHON
           value: $(params.VERSION)
@@ -119,7 +119,7 @@ spec:
       workspaces:
         - name: output
           workspace: gitops-workspace
-    - name: update-values
+    - name: update-dev-image
       runAfter:
         - fetch-gitops-repository
       taskRef:
@@ -139,7 +139,7 @@ spec:
           workspace: gitops-workspace
     - name: push-gitops-repository
       runAfter:
-        - update-values
+        - update-dev-image
       taskRef:
         kind: Task
         name: git-push-repository
