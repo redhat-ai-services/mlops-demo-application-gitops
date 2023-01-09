@@ -70,7 +70,7 @@ spec:
         - test
       params:
         - name: SHA
-          value: $(tasks.fetch-repository.results.commit)
+          value: $(tasks.fetch-sourcecode-repository.results.commit)
       taskRef:
         kind: Task
         name: generate-tag
