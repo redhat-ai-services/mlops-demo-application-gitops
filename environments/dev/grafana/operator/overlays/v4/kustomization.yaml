@@ -3,6 +3,9 @@ kind: Kustomization
 
 namespace: mlops-demo-dev
 
+resources:
+  - operatorgrp.yaml
+
 bases:
   - ../../base
 
