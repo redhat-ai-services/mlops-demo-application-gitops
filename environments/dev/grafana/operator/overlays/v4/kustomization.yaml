@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: mlops-demo-dev
 
 resources:
+  - serviceacct.yaml
   - operatorgrp.yaml
 
 bases:
