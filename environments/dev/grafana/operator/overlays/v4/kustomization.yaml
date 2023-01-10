@@ -1,6 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+namespace: mlops-demo-dev
+
 bases:
   - ../../base
 
@@ -9,6 +11,4 @@ patches:
       group: operators.coreos.com
       version: v1alpha1
       kind: Subscription
-      name: mlops-demo-dev
-      namespace: mlops-demo-dev
     path: patch-channel.yaml
