@@ -3,4 +3,6 @@ kind: OperatorGroup
 metadata:
   name: mlops-demo-dev
   namespace: mlops-demo-dev
-spec: {}
+spec:
+  targetNamespaces:
+  - mlops-demo-dev
