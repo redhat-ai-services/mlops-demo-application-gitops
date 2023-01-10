@@ -3,4 +3,4 @@
   value: 'https://github.com/rh-intelligent-application-practice/mlops-demo-gitops.git'
 - op: replace
   path: /spec/template/spec/source/targetRevision
-  value: main
+  value: row47-CreateGrafanaInstance
