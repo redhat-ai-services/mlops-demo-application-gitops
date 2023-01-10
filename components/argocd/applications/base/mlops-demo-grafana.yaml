@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: mlops-demo-grafana-applicationset
+spec:
+  generators:
+    - list:
+        elements:
+          - cluster: local
+            url: https://kubernetes.default.svc
+            values:
+              name: mlops-demo-grafana-dev
+              namespace: mlops-demo-dev
+              project: mlops-demo-dev
+              path: environments/dev/grafana/operator/overlays/v4
+          - cluster: local
+            url: https://kubernetes.default.svc
+            values:
+              name: mlops-demo-grafana-test
+              namespace: mlops-demo-test
+              project: mlops-demo-test
+              path: environments/test/grafana/operator/overlays/v4
+          - cluster: local
+            url: https://kubernetes.default.svc
+            values:
+              name: mlops-demo-grafana-prod
+              namespace: mlops-demo-prod
+              project: mlops-demo-prod
+              path: environments/prod/grafana/operator/overlays/v4
+  template:
+    metadata:
+      name: '{{values.name}}'
+    spec:
+      destination:
+        namespace: '{{values.namespace}}'
+        server: https://kubernetes.default.svc
+      project: '{{values.project}}'
+      source:
+        path: '{{values.path}}'
+        repoURL: patch-me-see-tenant-overlays
+        targetRevision: patch-me-see-tenant-overlays
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: true
