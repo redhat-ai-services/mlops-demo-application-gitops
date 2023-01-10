@@ -3,6 +3,9 @@ kind: OperatorGroup
 metadata:
   name: mlops-demo-dev
   namespace: mlops-demo-dev
+  annotations:
+    olm.providedAPIs: >-
+      Grafana.v1alpha1.integreatly.org,GrafanaDashboard.v1alpha1.integreatly.org,GrafanaDataSource.v1alpha1.integreatly.org,GrafanaFolder.v1alpha1.integreatly.org,GrafanaNotificationChannel.v1alpha1.integreatly.org
 spec:
   targetNamespaces:
   - mlops-demo-dev
