@@ -11,5 +11,4 @@ patches:
       group: operators.coreos.com
       version: v1alpha1
       kind: Subscription
-      namespace: mlops-demo-dev
     path: patch-channel.yaml
