@@ -33,9 +33,13 @@ spec:
       editable: true
       isDefault: true
       jsonData:
+        httpHeaderName1: 'Authorization'
         timeInterval: 5s
+        tlsSkipVerify: true
       name: Prometheus
+      secureJsonData:
+        httpHeaderValue1: Bearer $__file{/var/run/secrets/kubernetes.io/serviceaccount/token}
       type: prometheus
-      url: 'https://thanos-querier.openshift-monitoring.svc.cluster.local:9094'
+      url: 'https://thanos-querier.openshift-monitoring.svc.cluster.local:9091'
       version: 1
   name: mlops-demo-datasources.yaml
