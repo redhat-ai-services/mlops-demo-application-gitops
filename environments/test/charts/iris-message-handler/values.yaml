@@ -8,13 +8,13 @@ iris-message-handler:
     tag: "latest-f09a39e63f156e5038e9d0de6bd1ce999e1da186"
 
   kafka:
-    bootstrap: 'kafka-kafka-bootstrap.mlops-demo-dev.svc.cluster.local:9092'
+    bootstrap: 'kafka-kafka-bootstrap.mlops-demo-test.svc.cluster.local:9092'
     inferenceTopic: iris-inference
     inferenceResultsTopic: iris-inference-results
 
   kafkaSource:
     sink:
-      uri: http://iris-message-handler.mlops-demo-dev.svc.cluster.local/api/v1/predict-iris/
+      uri: http://iris-message-handler.mlops-demo-test.svc.cluster.local/api/v1/predict-iris/
 
   mlService:
     host: http://iris-inference-service-iris-inference-service:8000
