@@ -36,6 +36,6 @@ spec:
         timeInterval: 5s
       name: Prometheus
       type: prometheus
-      url: https://prometheus-k8s-openshift-monitoring.apps.cluster-7mnq4.7mnq4.sandbox1440.opentlc.com
+      url: 'https://thanos-querier.openshift-monitoring.svc.cluster.local:9094'
       version: 1
   name: mlops-demo-datasources.yaml
