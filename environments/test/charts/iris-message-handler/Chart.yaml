@@ -1,5 +1,5 @@
 apiVersion: v2
-name: iris-message-generator
+name: iris-message-handler
 description: A Helm chart for Kubernetes
 
 type: application
@@ -7,6 +7,6 @@ type: application
 version: 0.1.0
 
 dependencies:
-  - name: "iris-message-generator"
+  - name: "iris-message-handler"
     version: "0.1.0"
     repository: "file://../../../../components/charts/iris-message-handler/"
