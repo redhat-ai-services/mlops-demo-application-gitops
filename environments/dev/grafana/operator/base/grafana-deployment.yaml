@@ -21,3 +21,21 @@ spec:
           operator: In
           values:
             - grafana
+---
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDataSource
+metadata:
+  name: mlops-demo-grafanadatasource
+  namespace: mlops-demo-dev
+spec:
+  datasources:
+    - access: proxy
+      editable: true
+      isDefault: true
+      jsonData:
+        timeInterval: 5s
+      name: Prometheus
+      type: prometheus
+      url: https://prometheus-k8s-openshift-monitoring.apps.cluster-7mnq4.7mnq4.sandbox1440.opentlc.com
+      version: 1
+  name: mlops-demo-datasources.yaml
