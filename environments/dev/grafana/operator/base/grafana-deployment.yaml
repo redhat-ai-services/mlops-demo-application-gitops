@@ -9,14 +9,12 @@ spec:
   config:
     auth:
       disable_signout_menu: true
-    auth.anonymous:
-      enabled: true
     log:
       level: warn
       mode: console
     security:
-      admin_password: secret
-      admin_user: root
+      admin_password: r3dh4t1!
+      admin_user: grafana_admin
   dashboardLabelSelector:
     - matchExpressions:
         - key: app
