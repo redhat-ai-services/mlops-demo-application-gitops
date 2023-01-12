@@ -1,0 +1,19 @@
+apiVersion: sources.knative.dev/v1beta1
+kind: KafkaSource
+metadata:
+  name: {{ include "iris-message-handler.fullname" . }}
+  labels:
+    {{- include "iris-message-handler.labels" . | nindent 4 }}
+    app.kubernetes.io/component: kafka-source
+spec:
+  bootstrapServers:
+    - {{ .Values.kafka.bootstrap }}
+  consumerGroup: {{ include "iris-message-handler.fullname" . }}
+  consumers: 1
+  initialOffset: latest
+  sink:
+    {{- with .Values.kafkaSource.sink }}
+        {{- toYaml . | nindent 4 }}
+    {{- end }}
+  topics:
+    - {{ .Values.kafka.inferenceTopic }}

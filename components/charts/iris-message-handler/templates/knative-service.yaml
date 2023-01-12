@@ -1,0 +1,69 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  annotations:
+    app.openshift.io/route-disabled: 'false'
+  name: {{ include "iris-message-handler.fullname" . }}
+  labels:
+    {{- include "iris-message-handler.labels" . | nindent 4 }}
+    app.kubernetes.io/component: {{ .Chart.Name }}
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/target: "100"
+        autoscaling.knative.dev/targetUtilizationPercentage: "70"
+        autoscaling.knative.dev/window: "60s"
+        {{- with .Values.podAnnotations }}
+            {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "iris-message-handler.selectorLabels" . | nindent 8 }}
+    spec:
+      containerConcurrency: 0
+      serviceAccountName: {{ include "iris-message-handler.serviceAccountName" . }}
+      containers:
+        - name: {{ .Chart.Name }}
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 8 }}
+          {{- end }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: KAFKA_BOOTSTRAP
+              value: {{ .Values.kafka.bootstrap }}
+            - name: KAFKA_INFERENCE_RESULTS_TOPIC
+              value: {{ .Values.kafka.infernceResultsTopic }}
+            - name: MLSERVICE_HOST
+              value: {{ .Values.mlService.host }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+      enableServiceLinks: false
+      timeoutSeconds: 300
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+  traffic:
+    - latestRevision: true
+      percent: 100
