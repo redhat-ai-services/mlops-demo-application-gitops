@@ -66,8 +66,7 @@ spec:
         tlsSkipVerify: true
       name: Prometheus
       secureJsonData:
-        httpHeaderValue1: 'Bearer ${BEARER_TOKEN}'
+        httpHeaderValue1: 'Bearer $__file{/var/run/secrets/kubernetes.io/serviceaccount/token}'
       type: prometheus
       url: 'https://thanos-querier.openshift-monitoring.svc.cluster.local:9091'
-      version: 1
   name: mlops-demo-datasources.yaml
