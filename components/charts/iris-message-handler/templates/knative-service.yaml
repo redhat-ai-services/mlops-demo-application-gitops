@@ -50,6 +50,7 @@ spec:
             httpGet:
               path: /health
               port: http
+            successThreshold: 1
       enableServiceLinks: false
       timeoutSeconds: 300
       {{- with .Values.nodeSelector }}
