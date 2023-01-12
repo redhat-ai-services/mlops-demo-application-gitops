@@ -5,3 +5,4 @@ namespace: mlops-demo-test
 
 resources:
   - grafana-subscription.yaml
+  - grafana-deployment.yaml
