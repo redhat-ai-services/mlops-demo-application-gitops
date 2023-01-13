@@ -38,35 +38,7 @@ spec:
         tlsSkipVerify: true
       name: Prometheus
       secureJsonData:
-        httpHeaderValue1: 'Bearer ${TOKEN}'
+        httpHeaderValue1: 'Bearer $__file{/var/run/secrets/kubernetes.io/serviceaccount/token}'
       type: prometheus
       url: 'https://thanos-querier.openshift-monitoring.svc.cluster.local:9091'
   name: mlops-demo-datasources.yaml
----
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: patch-grafana-ds
-  annotations:
-    argocd.argoproj.io/hook: PostSync
-    argocd.argoproj.io/hook-delete-policy: HookSucceeded
-spec:
-  template:
-    spec:
-      containers:
-        - image: registry.redhat.io/openshift4/ose-cli:v4.6
-          command:
-            - /bin/bash
-            - -c
-            - |
-              set -e
-              echo "Patching grafana datasource with token for authentication to prometheus"
-              TOKEN=`oc serviceaccounts get-token grafana-serviceaccount -n mlops-demo-dev`
-              oc patch grafanadatasource prometheus --type='json' -p='[{"op":"add","path":"/spec/datasources/0/secureJsonData/httpHeaderValue1","value":"Bearer '${TOKEN}'"}]'
-          imagePullPolicy: Always
-          name: patch-grafana-ds
-      dnsPolicy: ClusterFirst
-      restartPolicy: OnFailure
-      serviceAccount: patch-grafana-ds-job
-      serviceAccountName: patch-grafana-ds-job
-      terminationGracePeriodSeconds: 30
