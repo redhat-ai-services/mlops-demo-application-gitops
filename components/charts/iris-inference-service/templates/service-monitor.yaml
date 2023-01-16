@@ -1,12 +1,17 @@
 apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
+kind: PodMonitor
 metadata:
-  name: {{ include "iris-inference-service.fullname" . }}
+  name: iris-podmonitor
+  namespace: {{ include "iris-inference-service.fullname" . }}
 spec:
-  endpoints:
+  podMetricsEndpoints:
     - interval: 30s
       path: /prometheus
-      port: http
+      port: metrics
+  namespaceSelector:
+    any: true
   selector:
     matchLabels:
+      app.kubernetes.io/managed-by: openshift-user-workload-monitoring
       {{ include "iris-inference-service.selectorLabels" . }}
+      
