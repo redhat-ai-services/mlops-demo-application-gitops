@@ -12,5 +12,4 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/managed-by: openshift-user-workload-monitoring
-      {{ include "iris-inference-service.selectorLabels" . }}
       
