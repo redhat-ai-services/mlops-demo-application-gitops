@@ -1,15 +1,11 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: iris-podmonitor
+  name: seldon-podmonitor
 spec:
-  podMetricsEndpoints:
-    - interval: 30s
-      path: /prometheus
-      port: metrics
-  namespaceSelector:
-    any: true
   selector:
     matchLabels:
-      app.kubernetes.io/managed-by: openshift-user-workload-monitoring
-      
+      app.kubernetes.io/managed-by: seldon-core
+  podMetricsEndpoints:
+    - port: metrics
+      path: /prometheus
