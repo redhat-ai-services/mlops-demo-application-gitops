@@ -2,7 +2,6 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   name: iris-podmonitor
-  namespace: {{ include "iris-inference-service.fullname" . }}
 spec:
   podMetricsEndpoints:
     - interval: 30s
