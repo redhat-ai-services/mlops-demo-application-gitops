@@ -42,8 +42,7 @@ spec:
         git switch $(params.gitRepositoryRevision)
         git add .
 
-        git commit --allow-empty -m "[OpenShift Pipeline]
-        $(params.commitMessage)"
+        git commit --allow-empty -m "[OpenShift Pipeline] $(params.commitMessage)"
 
         git remote set-url origin $(params.gitRepositoryName)
 
