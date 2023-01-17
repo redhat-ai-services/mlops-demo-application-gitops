@@ -156,6 +156,21 @@ spec:
       workspaces:
         - name: source
           workspace: gitops-workspace
+    - name: sync-dev
+      runAfter:
+        - push-gitops-repository
+      taskRef:
+        kind: ClusterTask
+        name: argocd-task-sync-and-wait
+      params:
+        - name: application-name
+          value: iris-inference-service-dev
+        - name: revision
+          value: $(params.GITOPS_GIT_REVISION)
+        - name: flags
+          value: '--'
+        - name: argocd-version
+          value: v2.5.4
   workspaces:
     - name: sourcecode-workspace
     - name: gitops-workspace
