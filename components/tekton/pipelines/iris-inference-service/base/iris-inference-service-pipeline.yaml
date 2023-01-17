@@ -168,7 +168,7 @@ spec:
         - name: revision
           value: $(params.GITOPS_GIT_REVISION)
         - name: flags
-          value: '--'
+          value: '--plaintext'
         - name: argocd-version
           value: v2.5.4
   workspaces:
