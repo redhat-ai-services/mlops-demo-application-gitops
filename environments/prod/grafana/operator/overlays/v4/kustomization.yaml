@@ -3,6 +3,9 @@ kind: Kustomization
 
 namespace: mlops-demo-prod
 
+commonAnnotations:
+  argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  
 bases:
   - ../../base
 
