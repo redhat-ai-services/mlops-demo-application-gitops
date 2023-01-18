@@ -3,4 +3,4 @@
   value: 'https://github.com/rh-intelligent-application-practice/mlops-demo-gitops.git'
 - op: replace
   path: /spec/source/targetRevision
-  value: ro2_48
+  value: row_48
