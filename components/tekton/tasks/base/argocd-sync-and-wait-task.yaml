@@ -64,8 +64,8 @@ spec:
         argocd app wait "$(params.application-name)" --sync --health --timeout
         180 "$(params.flags)"
 
-        if [ -z "$(params.deployment-name)" ]; then
-          if [ -z "$(params.deployment-namespace)" ]; then
+        if [ -n "$(params.deployment-name)" ]; then
+          if [ -n "$(params.deployment-namespace)" ]; then
             echo "Waiting for rollout of $(params.deployment-name) in $(params.deployment-namespace) to complete"
             oc rollout status "$(params.deployment-name)" -n "$(params.deployment-namespace)" --watch
           else
