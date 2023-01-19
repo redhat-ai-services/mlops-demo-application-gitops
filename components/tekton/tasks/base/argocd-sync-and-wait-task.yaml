@@ -28,7 +28,7 @@ spec:
     - default: '--'
       name: flags
       type: string
-    - default: v1.7
+    - default: v1.7.0
       name: gitops-version
       type: string
     - default: "180"
