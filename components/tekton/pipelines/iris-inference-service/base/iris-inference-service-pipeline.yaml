@@ -152,6 +152,10 @@ spec:
         - name: deployment-namespace
           value: mlops-demo-dev
     - name: update-test-image
+      when:
+        - input: $(params.GIT_REVISION)
+          operator: in
+          values: ["main"]
       runAfter:
         - sync-dev
       taskRef:
@@ -174,6 +178,10 @@ spec:
         - name: source
           workspace: gitops-workspace
     - name: sync-test
+      when:
+        - input: $(params.GIT_REVISION)
+          operator: in
+          values: ["main"]
       runAfter:
         - update-test-image
       taskRef:
@@ -187,6 +195,10 @@ spec:
         - name: deployment-namespace
           value: mlops-demo-test
     - name: update-prod-image
+      when:
+        - input: $(params.GIT_REVISION)
+          operator: in
+          values: ["main"]
       runAfter:
         - sync-test
       taskRef:
@@ -209,6 +221,10 @@ spec:
         - name: source
           workspace: gitops-workspace
     - name: sync-prod
+      when:
+        - input: $(params.GIT_REVISION)
+          operator: in
+          values: ["main"]
       runAfter:
         - update-prod-image
       taskRef:
