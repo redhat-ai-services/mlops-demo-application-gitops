@@ -59,6 +59,7 @@ spec:
         argocd app sync "$(params.application-name)" --revision "$(params.revision)" "$(params.flags)"
 
         # echo "Waiting for app to report healthy status"
+        
         # argocd app wait "$(params.application-name)" --sync --health --timeout 180 "$(params.flags)"
 
         if [ -z "$(params.deployment-name)"]
