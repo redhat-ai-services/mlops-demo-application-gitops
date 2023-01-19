@@ -57,7 +57,7 @@ spec:
 
         echo "Triggering sync of $(params.application-name)"
 
-        argocd app get --refresh $(params.application-name)"
+        argocd app get --refresh "$(params.application-name)"
 
         # argocd app sync "$(params.application-name)" --revision
         # "$(params.revision)" "$(params.flags)"
