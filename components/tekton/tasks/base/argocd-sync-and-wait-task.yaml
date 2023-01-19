@@ -59,9 +59,9 @@ spec:
         fi
 
         echo "Triggering refresh of $(params.application-name)"
-        
+
         argocd app get $(params.application-name) --refresh "$(params.flags)"
-        
+
         echo "Waiting for app to report healthy status"
 
         argocd app wait "$(params.application-name)" --sync --health --timeout

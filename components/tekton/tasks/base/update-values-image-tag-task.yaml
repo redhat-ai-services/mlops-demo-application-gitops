@@ -43,7 +43,7 @@ spec:
         set -e
 
         echo "**** Updating $(params.fileName) image tag to $(params.imageTag)"
-        
+
         imageTag=$(params.imageTag)
         imageTagTrimmed=$(echo "${imageTag//[$'\t\r\n']}")
         sed -i "s#tag: ".*"#tag: \"$imageTag\"#" ./$(params.filePath)/$(params.fileName)
