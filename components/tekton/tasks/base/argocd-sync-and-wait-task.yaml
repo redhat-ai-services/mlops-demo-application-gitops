@@ -28,8 +28,11 @@ spec:
     - default: '--'
       name: flags
       type: string
-    - default: v2.2.2
+    - default: v1.7
       name: gitops-version
+      type: string
+    - default: "180"
+      name: argo-timeout
       type: string
     - description: name of the application to sync
       name: deployment-name
@@ -57,7 +60,7 @@ spec:
 
         echo "Triggering sync of $(params.application-name)"
 
-        argocd app get --refresh "$(params.application-name)"
+        argocd app get --refresh "$(params.application-name)" "$(params.flags)"
 
         # argocd app sync "$(params.application-name)" --revision
         # "$(params.revision)" "$(params.flags)"
@@ -65,7 +68,7 @@ spec:
         echo "Waiting for app to report healthy status"
 
         argocd app wait "$(params.application-name)" --sync --health --timeout
-        180 "$(params.flags)"
+        "$(params.argo-timeout)" "$(params.flags)"
 
         if [ -n "$(params.deployment-name)" ]; then
           if [ -n "$(params.deployment-namespace)" ]; then
