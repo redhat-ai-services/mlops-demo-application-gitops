@@ -58,16 +58,9 @@ spec:
           yes | argocd login "$ARGOCD_SERVER" --username="$ARGOCD_USERNAME" --password="$ARGOCD_PASSWORD";
         fi
 
-        echo "Triggering sync of $(params.application-name)"
-
-        if [[ $(argocd app get $(params.application-name) -o json | jq '.spec.syncPolicy.automated') != "null" ]] ; then
-          echo "Triggering refresh of $(params.application-name)"
-          argocd app get $(params.application-name) --refresh "$(params.flags)"
-        else
-          echo "Triggering sync of $(params.application-name)"
-          argocd app sync $(params.application-name) --revision "$(params.revision)" "$(params.flags)"
-        fi
-
+        echo "Triggering refresh of $(params.application-name)"
+        argocd app get $(params.application-name) --refresh "$(params.flags)"
+        
         echo "Waiting for app to report healthy status"
 
         argocd app wait "$(params.application-name)" --sync --health --timeout
