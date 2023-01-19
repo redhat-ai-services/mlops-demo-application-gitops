@@ -160,17 +160,15 @@ spec:
       runAfter:
         - push-gitops-repository
       taskRef:
-        kind: ClusterTask
+        kind: Task
         name: argocd-task-sync-and-wait
       params:
         - name: application-name
           value: iris-inference-service-dev
-        - name: revision
-          value: $(params.GITOPS_GIT_REVISION)
-        - name: flags
-          value: '--plaintext'
-        - name: argocd-version
-          value: v2.5.4
+        - name: deployment-name
+          value: iris-inference-service-iris-inference-service-0-classifier
+        - name: deployment-namespace
+          value: mlops-demo-dev
   workspaces:
     - name: sourcecode-workspace
     - name: gitops-workspace
