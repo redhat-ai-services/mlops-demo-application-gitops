@@ -67,9 +67,9 @@ spec:
         if [ -n "$(params.deployment-name)" ]; then
           if [ -n "$(params.deployment-namespace)" ]; then
             echo "Waiting for rollout of $(params.deployment-name) in $(params.deployment-namespace) to complete"
-            oc rollout status "$(params.deployment-name)" -n "$(params.deployment-namespace)" --watch
+            oc rollout status deployment "$(params.deployment-name)" -n "$(params.deployment-namespace)" --watch
           else
             echo "Waiting for rollout of $(params.deployment-name) to complete"
-            oc rollout status "$(params.deployment-name)" --watch
+            oc rollout status deployment "$(params.deployment-name)" --watch
           fi
         fi
