@@ -29,7 +29,7 @@ spec:
       name: flags
       type: string
     - default: v2.2.2
-      name: argocd-version
+      name: gitops-version
       type: string
     - description: name of the application to sync
       name: deployment-name
