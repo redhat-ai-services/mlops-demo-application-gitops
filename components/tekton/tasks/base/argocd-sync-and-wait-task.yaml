@@ -56,6 +56,7 @@ spec:
         fi
 
         echo "Triggering sync of $(params.application-name)"
+        
         argocd app sync "$(params.application-name)" --revision "$(params.revision)" "$(params.flags)"
 
         # echo "Waiting for app to report healthy status"
