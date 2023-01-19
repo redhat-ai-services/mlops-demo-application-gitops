@@ -18,6 +18,16 @@ spec:
     - name: imageTag
       description: The image tag to be written into the YAML
       type: string
+    - name: gitRepositoryName
+      description: Name of the repository to be pushed
+      type: string
+    - name: gitRepositoryRevision
+      description: Branch to push to
+      type: string
+      default: main
+    - name: commitMessage
+      description: The git commit message
+      type: string
     - name: verbose
       description: Log the commands used during execution
       type: string
@@ -32,10 +42,30 @@ spec:
         #!/usr/bin/env sh
         set -e
 
-        if [[ "$(params.verbose)" == "true" ]] ; then
-          echo "**** Updating $(params.fileName) image tag to $(params.imageTag)"
-        fi
-
+        echo "**** Updating $(params.fileName) image tag to $(params.imageTag)"
+        
         imageTag=$(params.imageTag)
         imageTagTrimmed=$(echo "${imageTag//[$'\t\r\n']}")
         sed -i "s#tag: ".*"#tag: \"$imageTag\"#" ./$(params.filePath)/$(params.fileName)
+    - name: push-repository
+      image: alpine/git:v2.26.2
+      workingDir: $(workspaces.source.path)
+      script: |
+        #!/usr/bin/env sh
+        # set -e
+
+        if [[ "$(params.verbose)" == "true" ]] ; then
+          echo "**** Pushing $(params.gitRepositoryName) repository branch $(params.gitRepositoryRevision) to remote origin"
+        fi
+
+        git config --global user.email "tekton@tekton.dev"
+        git config --global user.name "OpenShift Pipeline"
+
+        git switch $(params.gitRepositoryRevision)
+        git add .
+
+        git commit --allow-empty -m "[OpenShift Pipeline] $(params.commitMessage)"
+
+        git remote set-url origin $(params.gitRepositoryName)
+
+        git push

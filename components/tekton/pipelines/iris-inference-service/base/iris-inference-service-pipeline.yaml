@@ -133,32 +133,18 @@ spec:
           value: $(params.GITOPS_PATH)
         - name: imageTag
           value: $(tasks.generate-tag.results.image-tag)
-        - name: verbose
-          value: "true"
-      workspaces:
-        - name: source
-          workspace: gitops-workspace
-    - name: push-gitops-repository
-      runAfter:
-        - update-dev-image
-      taskRef:
-        kind: Task
-        name: git-push-repository
-      params:
         - name: gitRepositoryName
           value: $(params.GITOPS_GIT_REPO)
         - name: gitRepositoryRevision
           value: $(params.GITOPS_GIT_REVISION)
         - name: commitMessage
           value: "Updating Values YAML Image tag to $(tasks.generate-tag.results.image-tag)"
-        - name: verbose
-          value: "true"
       workspaces:
         - name: source
           workspace: gitops-workspace
     - name: sync-dev
       runAfter:
-        - push-gitops-repository
+        - update-dev-image
       taskRef:
         kind: Task
         name: argocd-task-sync-and-wait
