@@ -34,10 +34,10 @@ spec:
     - default: "180"
       name: argo-timeout
       type: string
-    - description: name of the application to sync
+    - description: name of the deployment to validate the rollout
       name: deployment-name
       type: string
-    - description: name of the application to sync
+    - description: namespace of the deployment to validate the rollout
       name: deployment-namespace
       type: string
   stepTemplate:
@@ -60,10 +60,13 @@ spec:
 
         echo "Triggering sync of $(params.application-name)"
 
-        argocd app get --refresh "$(params.application-name)" "$(params.flags)"
-
-        # argocd app sync "$(params.application-name)" --revision
-        # "$(params.revision)" "$(params.flags)"
+        if [[ $(argocd app get $(params.application-name) -o json | jq '.spec.syncPolicy.automated') != "null" ]] ; then
+          echo "Triggering refresh of $(params.application-name)"
+          argocd app get $(params.application-name) --refresh "$(params.flags)"
+        else
+          echo "Triggering sync of $(params.application-name)"
+          argocd app sync $(params.application-name) --revision "$(params.revision)" "$(params.flags)"
+        fi
 
         echo "Waiting for app to report healthy status"
 
