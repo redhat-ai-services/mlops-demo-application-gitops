@@ -1,0 +1,72 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  annotations:
+    tekton.dev/categories: Deployment
+    tekton.dev/displayName: argocd
+    tekton.dev/pipelines.minVersion: 0.12.1
+    tekton.dev/platforms: linux/amd64
+    tekton.dev/tags: deploy
+  labels:
+    app.kubernetes.io/version: '0.2'
+  name: argocd-task-sync-and-wait
+spec:
+  description: >-
+    This task syncs (deploys) an Argo CD application and waits for it to be
+    healthy.
+
+    To do so, it requires the address of the Argo CD server and some form of
+    authentication either a username/password or an authentication token.
+  params:
+    - description: name of the application to sync
+      name: application-name
+      type: string
+    - default: HEAD
+      description: the revision to sync to
+      name: revision
+      type: string
+    - default: '--'
+      name: flags
+      type: string
+    - default: v2.2.2
+      name: argocd-version
+      type: string
+    - description: name of the application to sync
+      name: deployment-name
+      type: string
+    - description: name of the application to sync
+      name: deployment-namespace
+      type: string
+  stepTemplate:
+    envFrom:
+      - configMapRef:
+          name: argocd-env-configmap
+      - secretRef:
+          name: argocd-env-secret
+    name: ''
+    resources: {}
+  steps:
+    - image: 'quay.io/argoproj/argocd:$(params.argocd-version)'
+      name: login
+      resources: {}
+      script: >
+        if [ -z "$ARGOCD_AUTH_TOKEN" ]; then
+          echo "Logging into argocd"
+          yes | argocd login "$ARGOCD_SERVER" --username="$ARGOCD_USERNAME" --password="$ARGOCD_PASSWORD";
+        fi
+
+        echo "Triggering sync of $(params.application-name)" 
+        argocd app sync "$(params.application-name)" --revision "$(params.revision)" "$(params.flags)"
+
+        # echo "Waiting for app to report healthy status" 
+        # argocd app wait "$(params.application-name)" --sync --health --timeout 180 "$(params.flags)"
+
+        if [ -z "$(params.deployment-name)"]
+          if [ -z "$(params.deployment-name)"]
+            echo "Waiting for rollout of $(params.deployment-name) in $(params.deployment-namespace) to complete"
+            oc rollout status "$(params.deployment-name)" -n "$(params.deployment-namespace)" --watch
+          else
+            echo "Waiting for rollout of $(params.deployment-name) to complete"
+            oc rollout status "$(params.deployment-name)" --watch
+          fi
+        fi
