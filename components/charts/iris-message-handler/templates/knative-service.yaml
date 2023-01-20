@@ -34,7 +34,7 @@ spec:
             - name: KAFKA_BOOTSTRAP
               value: {{ .Values.kafka.bootstrap }}
             - name: KAFKA_INFERENCE_RESULTS_TOPIC
-              value: {{ .Values.kafka.infernceResultsTopic }}
+              value: {{ .Values.kafka.inferenceResultsTopic }}
             - name: MLSERVICE_HOST
               value: {{ .Values.mlService.host }}
           resources:
