@@ -8,5 +8,5 @@ version: 0.1.0
 
 dependencies:
   - name: "kafka"
-    version: "0.1.0"
+    version: "0.1.1"
     repository: "https://rh-intelligent-application-practice.github.io/helm-charts/"
