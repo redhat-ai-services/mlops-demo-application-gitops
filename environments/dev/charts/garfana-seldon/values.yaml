@@ -1,0 +1,24 @@
+seldon-core-analytics:
+  fullnameOverride: "seldon-core-analytics"
+
+  grafana:
+    enabled: true
+    adminUser: grafana_admin
+    adminPassword: r3dh4t1!
+    sidecar:
+      dashboards:
+        enabled: true
+        label: seldon_dashboard
+    datasources:
+      datasources.yaml:
+        apiVersion: 1
+        datasources:
+        - name: Prometheus
+          type: prometheus
+  alertmanager:
+    config:
+      enabled: false
+  rbac:
+    enabled: true
+  prometheus:
+    enabled: false
