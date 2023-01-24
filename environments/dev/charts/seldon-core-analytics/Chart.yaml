@@ -4,9 +4,9 @@ description: A Helm chart for Kubernetes
 
 type: application
 
-version: 1.15.0-dev
+version: 1.16.0-dev
 
 dependencies:
   - name: "seldon-core-analytics"
-    version: "1.15.0-dev"
+    version: "1.16.0-dev"
     repository: "https://storage.googleapis.com/seldon-charts"
