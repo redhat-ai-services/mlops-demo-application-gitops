@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   - grafana-applicationset.yaml
-  # - grafana-seldon-applicationset.yaml
+  - grafana-seldon-applicationset.yaml
   - iris-inference-service-applicationset.yaml
   - iris-message-generator-applicationset.yaml
   - iris-message-handler-applicationset.yaml
