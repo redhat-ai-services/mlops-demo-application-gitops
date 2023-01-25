@@ -2,8 +2,17 @@ seldon-core-analytics:
   fullnameOverride: "seldon-core-analytics"
 
   grafana:
+    enabled: false
     sidecar:
       dashboards:
         enabled: true
         label: grafana_dashboard
         folder: /tmp/dashboards
+  alertmanager:
+  config:
+    enabled: false
+  rbac:
+    enabled: false
+  prometheus:
+    enabled: false
+
