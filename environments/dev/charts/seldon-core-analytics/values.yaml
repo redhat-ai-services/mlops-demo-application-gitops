@@ -2,7 +2,7 @@ seldon-core-analytics:
   fullnameOverride: "seldon-core-analytics"
 
   grafana:
-    enabled: true
+    enabled: false
     adminUser: grafana_admin
     adminPassword: r3dh4t1!
     sidecar:
