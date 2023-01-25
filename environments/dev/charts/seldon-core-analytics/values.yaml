@@ -2,15 +2,17 @@ seldon-core-analytics:
   fullnameOverride: "seldon-core-analytics"
 
   grafana:
-    enabled: false
+    enabled: true
+    adminUser: grafana_admin
+    adminPassword: r3dh4t1!
     sidecar:
       dashboards:
         enabled: true
         label: grafana_dashboard
         folder: /tmp/dashboards
   alertmanager:
-  config:
-    enabled: false
+    config:
+      enabled: false
   rbac:
     enabled: false
   prometheus:
