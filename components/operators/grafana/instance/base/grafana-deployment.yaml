@@ -20,28 +20,13 @@ spec:
           operator: In
           values:
             - grafana
-  dashboardProviders:
-   dashboardproviders.yaml:
-     apiVersion: 1
-     providers:
-     - name: 'default'
-       orgId: 1
-       folder: ''
-       type: file
-       disableDeletion: false
-       editable: true
-       options:
-         path: /var/lib/grafana/dashboards/default
-
-  dashboardsConfigMaps:
-    default: "grafana-dashboards"
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: grafana-dashboards
+  name: grafana-seldon-dashboard
   labels:
     grafana_dashboard: "1"
 data:
-  kubernetes.json: |
+  grafana-seldon-dashboard.json: |
    {{ .Files.Get "seldon.json" | indent 4 }}
