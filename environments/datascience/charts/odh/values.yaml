@@ -1,13 +1,11 @@
 odh:
-  jupyterHub:
-    enabled: false
-  additionalNotebooks:
+  notebookImages:
     enabled: true
   odhDashboard:
     enabled: true
   notebookController:
     enabled: true
   modelMesh:
-    enabled: false
+    enabled: true
   dataSciencePipelines:
     enabled: true
