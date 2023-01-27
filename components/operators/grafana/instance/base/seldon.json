@@ -1,35 +1,4 @@
-apiVersion: integreatly.org/v1alpha1
-kind: Grafana
-metadata:
-  name: grafana
-spec:
-  ingress:
-    enabled: true
-  config:
-    auth:
-      disable_signout_menu: true
-    log:
-      level: warn
-      mode: console
-    security:
-      admin_password: r3dh4t1!
-      admin_user: grafana_admin
-  dashboardLabelSelector:
-    - matchExpressions:
-        - key: app
-          operator: In
-          values:
-            - grafana
----
-apiVersion: integreatly.org/v1alpha1
-kind: GrafanaDashboard
-metadata:
-  name: seldon-dashboard
-  labels:
-    app: grafana
-spec:
-  json: >
-    {
+{
     "annotations": {
       "list": [
         {
@@ -1339,4 +1308,4 @@ spec:
     "title": "Prediction Analytics",
     "uid": "U1cSDzyZz",
     "version": 1
-    }
+  }
