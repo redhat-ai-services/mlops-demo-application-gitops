@@ -858,7 +858,7 @@ spec:
         "steppedLine": false,
         "targets": [
           {
-            "expr": "sum(rate(seldon_api_executor_client_requests_seconds_count{model_name=~\"$model_name\",model_version=~\"$model_version\",model_image=~\"$model_image\",predictor_name=~\"$predictor\",predictor_version=~\"$version\"}[5s])) by (model_name,predictor_name,predictor_version,model_image,model_version,service)",
+            "expr": "sum(rate(seldon_api_executor_client_requests_seconds_count{model_name=~\"$model_name\",model_version=~\"$model_version\",model_image=~\"$model_image\",predictor_name=~\"$predictor\",predictor_version=~\"$version\"}[1m])) by (model_name,predictor_name,predictor_version,model_image,model_version,service)",
             "format": "time_series",
             "hide": false,
             "intervalFactor": 2,
@@ -1047,7 +1047,7 @@ spec:
         "steppedLine": false,
         "targets": [
           {
-            "expr": "histogram_quantile(0.5, sum(rate(seldon_api_executor_client_requests_seconds_bucket{service=~\"/Predict\", model_image=~\"$model_image\",predictor_name=~\"$predictor\",predictor_version=~\"$version\",model_name=~\"$model_name\",model_version=~\"$model_version\"}[20s])) by (predictor_name,predictor_version,model_name,model_image,model_version,le))",
+            "expr": "histogram_quantile(0.5, sum(rate(seldon_api_executor_client_requests_seconds_bucket{service=~\"/Predict\", model_image=~\"$model_image\",predictor_name=~\"$predictor\",predictor_version=~\"$version\",model_name=~\"$model_name\",model_version=~\"$model_version\"}[5m])) by (predictor_name,predictor_version,model_name,model_image,model_version,le))",
             "format": "time_series",
             "hide": false,
             "intervalFactor": 2,
@@ -1057,7 +1057,7 @@ spec:
             "step": 2
           },
           {
-            "expr": "histogram_quantile(0.75, sum(rate(seldon_api_executor_client_requests_seconds_bucket{service=~\".*[Pp]redict\",model_image=~\"$model_image\",predictor_name=~\"$predictor\",predictor_version=~\"$version\",model_name=~\"$model_name\",model_version=~\"$model_version\"}[20s])) by (predictor_name,predictor_version,model_name,model_image,model_version,service,le))",
+            "expr": "histogram_quantile(0.75, sum(rate(seldon_api_executor_client_requests_seconds_bucket{service=~\".*[Pp]redict\",model_image=~\"$model_image\",predictor_name=~\"$predictor\",predictor_version=~\"$version\",model_name=~\"$model_name\",model_version=~\"$model_version\"}[5m])) by (predictor_name,predictor_version,model_name,model_image,model_version,service,le))",
             "format": "time_series",
             "hide": false,
             "intervalFactor": 2,
@@ -1067,7 +1067,7 @@ spec:
             "step": 2
           },
           {
-            "expr": "histogram_quantile(0.9, sum(rate(seldon_api_executor_client_requests_seconds_bucket{service=~\".*[Pp]redict\",model_image=~\"$model_image\",predictor_name=~\"$predictor\",predictor_version=~\"$version\",model_name=~\"$model_name\",model_version=~\"$model_version\"}[20s])) by (predictor_name,predictor_version,model_name,model_image,model_version, service,le))",
+            "expr": "histogram_quantile(0.9, sum(rate(seldon_api_executor_client_requests_seconds_bucket{service=~\".*[Pp]redict\",model_image=~\"$model_image\",predictor_name=~\"$predictor\",predictor_version=~\"$version\",model_name=~\"$model_name\",model_version=~\"$model_version\"}[5m])) by (predictor_name,predictor_version,model_name,model_image,model_version, service,le))",
             "format": "time_series",
             "hide": false,
             "intervalFactor": 2,
@@ -1077,7 +1077,7 @@ spec:
             "step": 2
           },
           {
-            "expr": "histogram_quantile(0.95, sum(rate(seldon_api_executor_client_requests_seconds_bucket{service=~\".*[Pp]redict\",model_image=~\"$model_image\",predictor_name=~\"$predictor\",predictor_version=~\"$version\",model_name=~\"$model_name\",model_version=~\"$model_version\"}[20s])) by (predictor_name,predictor_version,model_name,model_image,model_version,service,le))",
+            "expr": "histogram_quantile(0.95, sum(rate(seldon_api_executor_client_requests_seconds_bucket{service=~\".*[Pp]redict\",model_image=~\"$model_image\",predictor_name=~\"$predictor\",predictor_version=~\"$version\",model_name=~\"$model_name\",model_version=~\"$model_version\"}[5m])) by (predictor_name,predictor_version,model_name,model_image,model_version,service,le))",
             "format": "time_series",
             "hide": false,
             "intervalFactor": 2,
