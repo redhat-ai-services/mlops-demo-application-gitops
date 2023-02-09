@@ -1,4 +1,6 @@
-# mlops-demo-application-gitops
+# MLOps Demo: Application GitOps
+
+This repo contains resources that are deployed and managed by the application team in a gitops environment. These resources are deployed to the namespaces created by the tenant-gitops repo utilizing the ArgoCD instance created by that repo.
 
 ## Creating Sealed Secret for SSH GitHub Authentication
 
