@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  generateName: iris-inference-service-
+  name: iris-inference-service-pipelinerun-
 spec:
   params:
     - name: APP_NAME
