@@ -1,7 +1,6 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  name: iris-inference-service
   generateName: iris-inference-service-
 spec:
   params:
