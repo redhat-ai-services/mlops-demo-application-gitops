@@ -1,11 +1,12 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  name: iris-inference-service-pipelinerun-
+  name: iris-inference-service
+  generateName: iris-inference-service-
 spec:
   params:
     - name: APP_NAME
-      value: iris-inference-service-pipelinerun
+      value: iris-inference-service
     - name: GIT_REPO
       value: >-
         https://github.com/rh-intelligent-application-practice/mlops-demo-iris-inference-service.git
