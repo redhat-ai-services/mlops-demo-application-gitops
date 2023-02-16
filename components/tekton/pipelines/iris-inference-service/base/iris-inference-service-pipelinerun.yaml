@@ -54,7 +54,6 @@ metadata:
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
   namespace: mlops-demo-pipelines
 spec:
-  serviceAccountName: pipeline
   parallelism: 1
   completions: 1
   backoffLimit: 6
@@ -62,6 +61,7 @@ spec:
     metadata:
       name: pipelinerun-delete
     spec:
+      serviceAccountName: pipeline
       containers:
         - name: pipelinerun-delete
           image: gcr.io/tekton-releases/dogfooding/tkn
