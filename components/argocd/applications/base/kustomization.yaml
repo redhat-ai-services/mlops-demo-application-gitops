@@ -11,5 +11,6 @@ resources:
   # - mlflow-server.yaml
   - mlops-demo-app-of-apps.yaml
   - mlops-demo-pipeline-tasks.yaml
+  - mlops-demo-pipeline-rbac.yaml
   - mlops-demo-pipelines.yaml
   - odh-application.yaml
