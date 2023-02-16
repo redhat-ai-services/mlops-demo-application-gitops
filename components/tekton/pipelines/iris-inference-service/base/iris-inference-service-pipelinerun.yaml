@@ -1,0 +1,46 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: iris-inference-service
+spec:
+  params:
+    - name: APP_NAME
+      value: iris-inference-service
+    - name: GIT_REPO
+      value: >-
+        https://github.com/rh-intelligent-application-practice/mlops-demo-iris-inference-service.git
+    - name: GIT_REVISION
+      value: main
+    - name: IMAGE_NAME
+      value: >-
+        image-registry.openshift-image-registry.svc:5000/mlops-demo-pipelines/iris-inference-service
+    - name: PATH_CONTEXT
+      value: .
+    - name: VERSION
+      value: 3.9-ubi8
+    - name: GITOPS_GIT_REPO
+      value: git@github.com:rh-intelligent-application-practice/mlops-demo-application-gitops.git
+    - name: GITOPS_GIT_REVISION
+      value: main
+    - name: GITOPS_PATH
+      value: environments/dev/charts/iris-inference-service
+  pipelineRef:
+    name: iris-inference-service
+  resources: []
+  workspaces:
+    - name: sourcecode-workspace
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 5Gi
+    - name: gitops-workspace
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
