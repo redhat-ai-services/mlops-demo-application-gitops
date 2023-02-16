@@ -48,7 +48,7 @@ spec:
 kind: Job
 apiVersion: batch/v1
 metadata:
-  generateName: pipelinerun-delete-
+  name: pipelinerun-delete
   annotations:
     argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
