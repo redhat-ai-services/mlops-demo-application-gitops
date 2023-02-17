@@ -3,3 +3,5 @@ kind: Kustomization
 
 resources:
   - kubeflow-image-puller-rolebinding.yaml
+  - mlops-demo-application-gitops-github-ssh-key-sealed-secret.yaml
+  - pipelines-sa.yaml
