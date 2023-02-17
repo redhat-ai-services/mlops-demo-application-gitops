@@ -44,3 +44,13 @@ kubectl get secret mlops-demo-application-gitops-github-ssh-key -o jsonpath="{.d
 ```
 
 5. The secret is now available in your namespace as specified in Step 2
+
+## Running the Cluster Bootstrap
+
+Execute the bootstrap script to begin the installation process:
+
+```sh
+./scripts/bootstrap.sh
+```
+
+Additional ArgoCD Application objects will be created and synced in OpenShift GitOps. You can follow the progress of the sync using the ArgoCD URL that the script will provide. This sync operation should complete in a few seconds.
