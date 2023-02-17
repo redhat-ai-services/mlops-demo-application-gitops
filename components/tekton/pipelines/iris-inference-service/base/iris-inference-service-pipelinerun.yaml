@@ -61,7 +61,7 @@ spec:
     metadata:
       name: pipelinerun-delete
     spec:
-      serviceAccountName: tekton-pipelines-controller
+      serviceAccountName: tekton-cleaner
       containers:
         - name: pipelinerun-delete
           image: gcr.io/tekton-releases/dogfooding/tkn
