@@ -50,7 +50,7 @@ apiVersion: batch/v1
 metadata:
   name: pipelinerun-delete
   annotations:
-    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
   namespace: mlops-demo-pipelines
 spec:
