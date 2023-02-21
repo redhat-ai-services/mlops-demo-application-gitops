@@ -10,8 +10,8 @@ metadata:
   name: tekton-cleaner
   namespace: mlops-demo-pipelines
 rules:
-  - apiGroups: ["tekton.dev"]
-    resources: ["pipelineruns"]
+  - apiGroups: ["tekton.dev", "pipelineruns.tekton.dev"]
+    resources: ["pipelineruns", "pipelinerun"]
     verbs: ["delete", "get", "watch", "list"]
 --- 
 apiVersion: rbac.authorization.k8s.io/v1
