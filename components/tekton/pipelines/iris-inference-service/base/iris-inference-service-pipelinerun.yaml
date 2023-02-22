@@ -47,31 +47,3 @@ spec:
           resources:
             requests:
               storage: 1Gi
----
-kind: Job
-apiVersion: batch/v1
-metadata:
-  name: pipelinerun-delete
-  annotations:
-    argocd.argoproj.io/hook: PostSync
-    argocd.argoproj.io/hook-delete-policy: HookSucceeded
-  namespace: mlops-demo-pipelines
-spec:
-  parallelism: 1
-  completions: 1
-  backoffLimit: 6
-  template:
-    metadata:
-      name: pipelinerun-delete
-    spec:
-      serviceAccount: tekton-cleaner
-      containers:
-        - name: pipelinerun-delete
-          image: gcr.io/tekton-releases/dogfooding/tkn
-          command: ["tkn", "pipelinerun", "delete", "iris-inference-service", "-n mlops-demo-pipelines"]
-          resources: {}
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-          imagePullPolicy: Always
-      restartPolicy: Never
-      terminationGracePeriodSeconds: 30
