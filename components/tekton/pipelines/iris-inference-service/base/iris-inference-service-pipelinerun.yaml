@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  name: iris-inference-serviceJH
+  name: iris-inference-servicejh
   annotations:
     argocd.argoproj.io/hook: PostSync, SyncFail
     argocd.argoproj.io/hook-delete-policy: HookFailed, HookSucceeded
