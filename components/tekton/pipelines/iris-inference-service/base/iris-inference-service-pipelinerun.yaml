@@ -3,7 +3,7 @@ kind: PipelineRun
 metadata:
   name: iris-inference-servicejh
   annotations:
-    argocd.argoproj.io/hook: PreSync, SyncFail
+    argocd.argoproj.io/hook: PostSync, SyncFail
     argocd.argoproj.io/hook-delete-policy: HookFailed, HookSucceeded
 spec:
   params:
