@@ -16,5 +16,5 @@ resources:
   - iris-inference-service-eventlistener-route.yaml
   - iris-inference-service-imagestream.yaml
   - iris-inference-service-pipeline.yaml
-  - iris-inference-service-pipelinerun-workflow.yaml
+  - iris-inference-service-pipelinerun.yaml
   - iris-inference-service-trigger-template.yaml
