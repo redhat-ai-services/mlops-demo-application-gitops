@@ -12,4 +12,3 @@ spec:
   generateBucketName: iris-model
   objectBucketName: obc-default-iris-model
   storageClassName: openshift-storage.noobaa.io
-
