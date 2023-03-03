@@ -4,9 +4,9 @@ metadata:
   name: iris-inference-service-workflow
 spec:
   ttlStrategy:
-    secondsAfterCompletion: 10 
-    secondsAfterSuccess: 5     
-    secondsAfterFailure: 5     
+    secondsAfterCompletion: 10
+    secondsAfterSuccess: 5
+    secondsAfterFailure: 5
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
