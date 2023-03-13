@@ -32,6 +32,10 @@ spec:
       type: string
       default: main
       description: The gitops git repository revision
+    - name: MODEL_VERSION
+      description: The model version number
+      type: string
+      default: iris-model_2023-03-13
   tasks:
     - name: fetch-sourcecode-repository
       params:
@@ -49,12 +53,30 @@ spec:
       workspaces:
         - name: output
           workspace: sourcecode-workspace
+    - name: download-model
+      params:
+        - name: OBJECT_BUCKET_CLAIM
+          value: iris-model
+        - name: OBJECT_BUCKET_CLAIM_NAMESPACE
+          value: mlops-demo-datascience
+        - name: SOURCE_FILE
+          value: $(params.MODEL_VERSION)
+        - name: TARGET_FILE
+          value: ./models/model
+      taskRef:
+        kind: Task
+        name: download-from-obc
+      workspaces:
+        - name: source
+          workspace: source
+        - name: empty-dir
+          workspace: empty-dir
     - name: test
       runAfter:
         - fetch-sourcecode-repository
       params:
         - name: PYTHON
-          value: $(params.VERSION)
+          value: $(params.PYTHON_VERSION)
       taskRef:
         kind: Task
         name: tox
@@ -81,7 +103,7 @@ spec:
         - name: PATH_CONTEXT
           value: $(params.PATH_CONTEXT)
         - name: VERSION
-          value: $(params.VERSION)
+          value: $(params.PYTHON_VERSION)
       taskRef:
         kind: ClusterTask
         name: s2i-python
@@ -228,3 +250,4 @@ spec:
   workspaces:
     - name: sourcecode-workspace
     - name: gitops-workspace
+    - name: empty-dir

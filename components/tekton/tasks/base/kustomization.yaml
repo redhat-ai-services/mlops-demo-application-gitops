@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - argocd-sync-and-wait-task.yaml
+  - download-from-obc.yaml
   - generate-tag-task.yaml
   - tox-task.yaml
   - update-values-image-tag-task.yaml

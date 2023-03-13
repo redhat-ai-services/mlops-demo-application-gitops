@@ -1,0 +1,138 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: download-from-obc
+spec:
+  params:
+    - name: OBJECT_BUCKET_CLAIM
+      type: string
+    - name: OBJECT_BUCKET_CLAIM_NAMESPACE
+      type: string
+    - name: SOURCE_FILE
+      type: string
+    - name: TARGET_FILE
+      type: string
+    - default: .
+      name: CONTEXT_DIR
+      type: string
+  steps:
+    - env:
+        - name: OBJECT_BUCKET_CLAIM
+          value: $(inputs.params.OBJECT_BUCKET_CLAIM)
+        - name: OBJECT_BUCKET_CLAIM_NAMESPACE
+          value: $(inputs.params.OBJECT_BUCKET_CLAIM_NAMESPACE)
+      image: 'image-registry.openshift-image-registry.svc:5000/openshift/cli:latest'
+      name: get-obc-details
+      resources: {}
+      script: >
+        #!/bin/bash
+
+        echo "Getting connection details for ${OBJECT_BUCKET_CLAIM} in
+        ${OBJECT_BUCKET_CLAIM_NAMESPACE}"
+
+        oc get cm ${OBJECT_BUCKET_CLAIM} -n ${OBJECT_BUCKET_CLAIM_NAMESPACE} -o
+        'jsonpath={.data.BUCKET_NAME}' > /workspace/tmp/bucket_name
+
+        oc get cm ${OBJECT_BUCKET_CLAIM} -n ${OBJECT_BUCKET_CLAIM_NAMESPACE} -o
+        'jsonpath={.data.BUCKET_HOST}' > /workspace/tmp/bucket_host
+
+        oc get cm ${OBJECT_BUCKET_CLAIM} -n ${OBJECT_BUCKET_CLAIM_NAMESPACE} -o
+        'jsonpath={.data.BUCKET_PORT}' > /workspace/tmp/bucket_port
+
+        oc get secret ${OBJECT_BUCKET_CLAIM} -n ${OBJECT_BUCKET_CLAIM_NAMESPACE}
+        -o 'jsonpath={.data.AWS_ACCESS_KEY_ID}' | base64 -d >
+        /workspace/tmp/access_key
+
+        oc get secret ${OBJECT_BUCKET_CLAIM} -n ${OBJECT_BUCKET_CLAIM_NAMESPACE}
+        -o 'jsonpath={.data.AWS_SECRET_ACCESS_KEY}' | base64 -d >
+        /workspace/tmp/secret_key
+    - env:
+        - name: SOURCE_FILE
+          value: $(inputs.params.SOURCE_FILE)
+        - name: TARGET_FILE
+          value: $(inputs.params.TARGET_FILE)
+      image: 'quay.io/rhiap/object-bucket-claim-helper:latest'
+      name: download-file
+      resources: {}
+      script: >
+        #!/usr/bin/env python3
+
+        import os
+
+        from pathlib import Path
+
+        import urllib
+
+        import boto3
+
+        # disable cert warnings for odf 
+
+        import urllib3 
+
+        urllib3.disable_warnings()
+
+        source_file = os.environ["SOURCE_FILE"]
+
+        target_file = os.environ["TARGET_FILE"]
+
+        with open("/workspace/tmp/bucket_name", "r") as file:
+            bucket_name = file.read().rstrip()
+
+        with open("/workspace/tmp/bucket_host", "r") as file:
+            bucket_host = file.read().rstrip()
+
+        with open("/workspace/tmp/bucket_port", "r") as file:
+            bucket_port = file.read().rstrip()
+
+        if bucket_port == "443":
+            service_endpoint = f"https://{bucket_host}:{bucket_port}"
+        else:
+            service_endpoint = f"http://{bucket_host}:{bucket_port}"
+
+        with open("/workspace/tmp/access_key", "r") as file:
+            access_key = file.read().rstrip()
+
+        with open("/workspace/tmp/secret_key", "r") as file:
+            secret_key = file.read().rstrip()
+
+        print(f"Connecting to {service_endpoint}")
+
+        s3client = boto3.client(
+            "s3",
+            "us-east-1",
+            endpoint_url=service_endpoint,
+            aws_access_key_id=access_key,
+            aws_secret_access_key=secret_key,
+            use_ssl=True if "https" in service_endpoint else False,
+            verify=False,
+        )
+
+        file_path = os.path.dirname(target_file)
+
+        if not os.path.exists(file_path):
+            print()
+            print(f"Creating directory path: {file_path}")
+            os.makedirs(file_path)
+
+        objects = s3client.list_objects_v2(Bucket=bucket_name)
+
+        print()
+
+        print("Objects in bucket:") 
+
+        for obj in objects["Contents"]:
+            print(obj["Key"])
+
+        print()
+
+        print(f"Downloading {source_file} to {target_file} from bucket
+        {bucket_name}")
+
+        s3client.download_file(Bucket=bucket_name, Key=source_file,
+        Filename=target_file)
+      workingDir: $(workspaces.source.path)/$(params.CONTEXT_DIR)
+  workspaces:
+    - mountPath: /workspace/source
+      name: source
+    - mountPath: /workspace/tmp
+      name: empty-dir
