@@ -21,7 +21,7 @@ spec:
     - name: PATH_CONTEXT
       type: string
       default: .
-    - name: VERSION
+    - name: PYTHON_VERSION
       type: string
       default: 3.9-ubi8
     - name: GITOPS_GIT_REPO
