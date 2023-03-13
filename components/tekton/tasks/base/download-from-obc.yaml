@@ -65,9 +65,9 @@ spec:
 
         import boto3
 
-        # disable cert warnings for odf 
+        # disable cert warnings for odf
 
-        import urllib3 
+        import urllib3
 
         urllib3.disable_warnings()
 
@@ -118,7 +118,7 @@ spec:
 
         print()
 
-        print("Objects in bucket:") 
+        print("Objects in bucket:")
 
         for obj in objects["Contents"]:
             print(obj["Key"])
