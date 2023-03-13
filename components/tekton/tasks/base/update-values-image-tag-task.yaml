@@ -42,13 +42,6 @@ spec:
         #!/usr/bin/env sh
         set -e
 
-        echo "*** PDW"
-        pwd
-
-        echo "*** list objects"
-        ls -laFR .
-
-
         echo "**** Updating ./$(params.filePath)/$(params.fileName) image tag to $(params.imageTag)"
 
         imageTag=$(params.imageTag)
