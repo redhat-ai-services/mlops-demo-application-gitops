@@ -68,7 +68,7 @@ spec:
         name: download-from-obc
       workspaces:
         - name: source
-          workspace: source
+          workspace: sourcecode-workspace
         - name: empty-dir
           workspace: empty-dir
     - name: test
