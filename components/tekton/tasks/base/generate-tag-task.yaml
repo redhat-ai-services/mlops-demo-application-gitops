@@ -9,6 +9,9 @@ spec:
   params:
     - name: SHA
       description: The git commit sha to include in the image tag name
+    - name: MODEL_VERSION
+      description: The version number of the model
+      default: "1"
   results:
     - name: image-tag
       description: The tag in the format of ${git-sha}-${model-version}-${date}
@@ -23,7 +26,7 @@ spec:
         sha=$(echo $(params.SHA) | cut -c1-7)
 
         # get the ml-model version
-        model_version="1"
+        model_version=$(params.MODEL_VERSION)
 
         # generate the current date/time
         date=$(date +"%Y%m%d-%H%M%S")
