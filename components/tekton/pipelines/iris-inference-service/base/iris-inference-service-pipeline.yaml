@@ -54,6 +54,8 @@ spec:
         - name: output
           workspace: sourcecode-workspace
     - name: download-model
+      runAfter:
+        - fetch-sourcecode-repository
       params:
         - name: OBJECT_BUCKET_CLAIM
           value: iris-model
@@ -73,7 +75,7 @@ spec:
           workspace: empty-dir
     - name: test
       runAfter:
-        - fetch-sourcecode-repository
+        - download-model
       params:
         - name: PYTHON
           value: $(params.PYTHON_VERSION)
