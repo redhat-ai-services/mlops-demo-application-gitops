@@ -9,3 +9,8 @@ odh:
     enabled: true
   dataSciencePipelines:
     enabled: true
+
+# Deploy Trevor's fix for the crb
+repos:
+  manifestsUrl: "https://github.com/strangiato/odh-manifests/tarball/"
+  manifestsVersion: oauth-crb-fix
