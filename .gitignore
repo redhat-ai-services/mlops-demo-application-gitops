@@ -3,3 +3,4 @@
 
 # Chart dependencies
 **/charts/*.tgz
+**/Chart.lock
