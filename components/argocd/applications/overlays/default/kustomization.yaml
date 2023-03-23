@@ -24,8 +24,13 @@ patches:
       kind: ApplicationSet
     path: patch-applicationset-repo-revision.yaml
   # Uncomment patches to disable automatic sync
-  # - target:
-  #     group: argoproj.io
-  #     version: v1alpha1
-  #     kind: Application
-  #   path: patch-application-manual-sync.yaml
+  - path: patch-applicationset-manual-sync.yaml
+    target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: ApplicationSet
+  - path: patch-application-manual-sync.yaml
+    target:
+      group: argoproj.io
+      kind: Application
+      version: v1alpha1
