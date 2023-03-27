@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - argocd-sync-and-wait-task.yaml
   - download-from-obc.yaml
+  - execute-kubeflow-pipeline.yaml
   - generate-tag-task.yaml
   - tox-task.yaml
   - update-values-image-tag-task.yaml
