@@ -12,4 +12,4 @@ odh:
   # Deploy Trevor's fix for the crb
   repos:
     manifestsUrl: "https://github.com/strangiato/odh-manifests/tarball/"
-    manifestsVersion: oauth-crb-fix
+    manifestsVersion: kfp-oauth-delegate-url-fix
