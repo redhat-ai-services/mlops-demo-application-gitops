@@ -1,5 +1,6 @@
 iris-inference-service:
   fullnameOverride: "iris-inference-service"
+  logLevel: DEBUG
 
   image:
     repository: image-registry.openshift-image-registry.svc:5000/mlops-demo-pipelines/iris-inference-service

@@ -1,3 +1,2 @@
 iris-message-generator:
   fullnameOverride: "iris-message-generator"
-  logLevel: DEBUG
