@@ -18,11 +18,21 @@ spec:
     - name: KUBEFLOW_ENDPOINT
       description: The endpoint URL for Kubeflow
       default: "https://ds-pipeline-ui.mlops-demo-datascience.svc.cluster.local:8443"
+    - name: DEFAULT_STORAGE_CLASS
+      description: The storage class Kubeflow will utilize for PVC creation
+      default: "ocs-storagecluster-ceph-rbd"
+    - name: DEFAULT_ACCESSMODES
+      description: The access mode Kubeflow will utilize for PVC creation
+      default: "ReadWriteOnce"
   steps:
     - name: execute-python
       image: $(inputs.params.IMAGE):$(inputs.params.TAG)
       env:
         - name: KUBEFLOW_ENDPOINT
           value: $(inputs.params.KUBEFLOW_ENDPOINT)
+        - name: DEFAULT_STORAGE_CLASS
+          value: $(inputs.params.DEFAULT_STORAGE_CLASS)
+        - name: DEFAULT_ACCESSMODES
+          value: $(inputs.params.DEFAULT_ACCESSMODES)
       script: |
         python $(inputs.params.SCRIPT)
