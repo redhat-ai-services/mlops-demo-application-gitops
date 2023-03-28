@@ -22,7 +22,7 @@ spec:
       description: 3.9-ubi8
       name: PYTHON_VERSION
       type: string
-    - default: 'https://ds-pipeline-ui-mlops-demo-datascience.apps.cluster-txb5d.txb5d.sandbox2565.opentlc.com/'
+    - default: 'https://ds-pipeline-ui-mlops-demo-datascience.apps.cluster-9lb9z.9lb9z.sandbox2347.opentlc.com/'
       description: The endpoint URL for Kubeflow
       name: KUBEFLOW_ENDPOINT
       type: string
