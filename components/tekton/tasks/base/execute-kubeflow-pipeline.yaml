@@ -17,7 +17,7 @@ spec:
       description: The location of the script to be executed
     - name: KUBEFLOW_ENDPOINT
       description: The endpoint URL for Kubeflow
-      default: "https://ds-pipeline-ui-mlops-demo-datascience.apps.cluster-mj8vt.mj8vt.sandbox2353.opentlc.com/"
+      default: "https://ds-pipeline-ui.mlops-demo-datascience.svc.cluster.local:8443"
   steps:
     - name: execute-python
       image: $(inputs.params.IMAGE):$(inputs.params.TAG)
