@@ -1336,7 +1336,7 @@ spec:
       ]
     },
     "timezone": "browser",
-    "title": "Prediction Analytics",
+    "title": "Credit Risk Prediction Analytics",
     "uid": "U1cSDzyZz",
     "version": 1
     }
