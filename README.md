@@ -7,7 +7,7 @@ This repo contains resources that are deployed and managed by the application te
 Prerequisites:
 - Kubectl CLI
 - Install Kubeseal CLI (https://github.com/bitnami-labs/sealed-secrets/releases/download)
-- Bootstrapped Openshift Cluster (see https://github.com/rh-intelligent-application-practice/mlops-demo-getting-started)
+- Bootstrapped Openshift Cluster (see https://github.com/rh-datascience-and-edge-practice/mlops-demo-getting-started)
 
 ### Steps
 

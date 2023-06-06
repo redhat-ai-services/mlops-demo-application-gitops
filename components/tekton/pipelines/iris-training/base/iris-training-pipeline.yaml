@@ -5,7 +5,7 @@ metadata:
 spec:
   params:
     - default: >-
-        https://github.com/rh-intelligent-application-practice/mlops-demo-iris-training-service.git
+        https://github.com/rh-datascience-and-edge-practice/mlops-demo-iris-training-service.git
       description: Iris Training Repo URL
       name: GIT_URL
       type: string
