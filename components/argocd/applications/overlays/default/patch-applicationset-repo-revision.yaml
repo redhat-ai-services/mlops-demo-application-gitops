@@ -3,4 +3,4 @@
   value: 'https://github.com/rh-datascience-and-edge-practice/mlops-demo-application-gitops.git'
 - op: replace
   path: /spec/template/spec/source/targetRevision
-  value: main
+  value: rhods
