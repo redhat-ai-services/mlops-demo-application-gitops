@@ -14,4 +14,4 @@ resources:
   - mlops-demo-pipeline-tasks.yaml
   - mlops-demo-pipelines-rbac.yaml
   - mlops-demo-pipelines.yaml
-  - odh-application.yaml
+  # - odh-application.yaml
