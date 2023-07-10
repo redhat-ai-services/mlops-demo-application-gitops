@@ -3,26 +3,26 @@ kind: Kustomization
 
 namespace: mlops-demo-gitops
 
-bases:
+resources:
   - ../../base
 
 patches:
-  - target:
+  - path: patch-app-of-apps.yaml
+    target:
       group: argoproj.io
-      version: v1alpha1
       kind: Application
       name: mlops-demo-app-of-apps
-    path: patch-app-of-apps.yaml
-  - target:
-      group: argoproj.io
       version: v1alpha1
+  - path: patch-application-repo-revision.yaml
+    target:
+      group: argoproj.io
       kind: Application
-    path: patch-application-repo-revision.yaml
-  - target:
-      group: argoproj.io
       version: v1alpha1
+  - path: patch-applicationset-repo-revision.yaml
+    target:
+      group: argoproj.io
       kind: ApplicationSet
-    path: patch-applicationset-repo-revision.yaml
+      version: v1alpha1
   # Uncomment patches to disable automatic sync
   # - path: patch-applicationset-manual-sync.yaml
   #   target:
