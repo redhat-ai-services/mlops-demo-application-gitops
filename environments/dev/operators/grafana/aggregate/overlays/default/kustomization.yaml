@@ -3,5 +3,5 @@ kind: Kustomization
 
 namespace: mlops-demo-dev
 
-bases:
+resources:
   - ../../../../../../../components/operators/grafana/aggregate/overlays/openshift-prometheus/
