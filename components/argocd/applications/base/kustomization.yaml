@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - datascience-buckets.yaml
+  - datascience-pipelines-instance.yaml
   - grafana-applicationset.yaml
   - iris-inference-service-applicationset.yaml
   - iris-message-generator-applicationset.yaml
