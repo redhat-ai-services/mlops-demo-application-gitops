@@ -16,7 +16,7 @@ rules:
       - create
       - update
 ---
-kind: ClusterRoleBinding
+kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: copy-obc
@@ -33,7 +33,7 @@ roleRef:
   kind: ClusterRole
   name: copy-obc
 ---
-kind: ClusterRoleBinding
+kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: copy-obc
