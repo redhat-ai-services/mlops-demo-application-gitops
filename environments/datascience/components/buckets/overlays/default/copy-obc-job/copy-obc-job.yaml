@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: copy-obc
-          image: image-registry.openshift-image-registry.svc:5000/openshift/cli
+          image: image-registry.openshift-image-registry.svc:5000/openshift/tools
           env:
             - name: TARGET_NAMESPACE
               value: 'mlops-demo-pipelines'
@@ -24,12 +24,12 @@ spec:
               echo "Copy secret ${OBC_NAME} to namespace ${TARGET_NAMESPACE}"
               oc get secret ${OBC_NAME} -o yaml | \
                 sed "s/namespace: .*/namespace: ${TARGET_NAMESPACE}/" | \
-                jq 'del(.metadata["namespace","creationTimestamp","resourceVersion","selfLink","uid"])' | \
+                jq 'del(.metadata["namespace","creationTimestamp","resourceVersion","selfLink","uid", "ownerReferences"])' | \
                 oc apply -f - -n ${TARGET_NAMESPACE}
               echo "Copy configmap ${OBC_NAME} to namespace ${TARGET_NAMESPACE}"
               oc get configmap ${OBC_NAME} -o yaml | \
                 sed "s/namespace: .*/namespace: ${TARGET_NAMESPACE}/" | \
-                jq 'del(.metadata["namespace","creationTimestamp","resourceVersion","selfLink","uid"])' | \
+                jq 'del(.metadata["namespace","creationTimestamp","resourceVersion","selfLink","uid", "ownerReferences"])' | \
                 oc apply -f - -n ${TARGET_NAMESPACE}
       restartPolicy: Never
       serviceAccount: copy-obc
