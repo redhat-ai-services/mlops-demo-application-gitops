@@ -13,18 +13,18 @@ spec:
         - name: copy-obc
           image: image-registry.openshift-image-registry.svc:5000/openshift/cli
           env:
-            - name: target-namespace
+            - name: TARGET_NAMESPACE
               value: 'mlops-demo-pipelines'
-            - name: obc
+            - name: OBC_NAME
               value: 'iris-model'
           command:
             - /bin/bash
             - -c
             - |
-              echo "Copy secret ${obc} to namspace ${target-namespace}"
-              oc get secret ${obc} -o yaml | oc apply -f - -n ${target-namespace}
-              echo "Copy configmap ${obc} to namspace ${target-namespace}"
-              oc get configmap ${obc} -o yaml | oc apply -f - -n ${target-namespace}
+              echo "Copy secret ${OBC_NAME} to namespace ${TARGET_NAMESPACE}"
+              oc get secret ${OBC_NAME} -o yaml | oc apply -f - -n ${TARGET_NAMESPACE}
+              echo "Copy configmap ${OBC_NAME} to namespace ${TARGET_NAMESPACE}"
+              oc get configmap ${OBC_NAME} -o yaml | oc apply -f - -n ${TARGET_NAMESPACE}
       restartPolicy: Never
       serviceAccount: copy-obc
       serviceAccountName: copy-obc
