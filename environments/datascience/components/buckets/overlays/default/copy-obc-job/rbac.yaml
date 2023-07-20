@@ -23,7 +23,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: copy-obc
-    namespace: openshift-storage
+    namespace: mlops-demo-datascience
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -54,7 +54,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: copy-obc
-    namespace: openshift-storage
+    namespace: mlops-demo-datascience
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
