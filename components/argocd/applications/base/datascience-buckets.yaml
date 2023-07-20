@@ -4,9 +4,8 @@ metadata:
   name: datascience-buckets
 spec:
   destination:
-    namespace: mlops-demo-datascience
     server: https://kubernetes.default.svc
-  project: mlops-demo-datascience
+  project: default
   source:
     path: environments/datascience/components/buckets/overlays/default
     repoURL: patch-me-see-tenant-overlays
