@@ -3,8 +3,6 @@ kind: Role
 metadata:
   name: copy-obc
   namespace: mlops-demo-datascience
-  annotations:
-    argocd.argoproj.io/sync-wave: "-5"
 rules:
   - apiGroups: [""]
     resources:
@@ -22,9 +20,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: copy-obc
   namespace: mlops-demo-datascience
-  annotations:
-    argocd.argoproj.io/hook: PreSync
-    argocd.argoproj.io/sync-wave: "-5"
 subjects:
   - kind: ServiceAccount
     name: copy-obc
@@ -39,8 +34,6 @@ kind: Role
 metadata:
   name: copy-obc
   namespace: mlops-demo-pipelines
-  annotations:
-    argocd.argoproj.io/sync-wave: "-5"
 rules:
   - apiGroups: [""]
     resources:
@@ -58,9 +51,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: copy-obc
   namespace: mlops-demo-pipelines
-  annotations:
-    argocd.argoproj.io/hook: PreSync
-    argocd.argoproj.io/sync-wave: "-5"
 subjects:
   - kind: ServiceAccount
     name: copy-obc
