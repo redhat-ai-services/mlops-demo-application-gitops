@@ -27,7 +27,8 @@ spec:
                 oc apply -f - -n ${TARGET_NAMESPACE}
               echo "Copy configmap ${OBC_NAME} to namespace ${TARGET_NAMESPACE}"
               oc get configmap ${OBC_NAME} -o json | \
-                jq 'del(.metadata["namespace","creationTimestamp","resourceVersion","selfLink","uid","ownerReferences","finalizers"])' | \                oc apply -f - -n ${TARGET_NAMESPACE}
+                jq 'del(.metadata["namespace","creationTimestamp","resourceVersion","selfLink","uid","ownerReferences","finalizers"])' | \
+                oc apply -f - -n ${TARGET_NAMESPACE}
       restartPolicy: Never
       serviceAccount: copy-obc
       serviceAccountName: copy-obc
