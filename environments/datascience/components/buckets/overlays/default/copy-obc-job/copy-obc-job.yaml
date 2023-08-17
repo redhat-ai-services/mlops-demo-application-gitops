@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: copy-obc
+  namespace: mlops-demo-datascience
+  generateName: copy-obc
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+spec:
+  template:
+    spec:
+      containers:
+        - name: copy-obc
+          image: image-registry.openshift-image-registry.svc:5000/openshift/tools
+          env:
+            - name: TARGET_NAMESPACE
+              value: 'mlops-demo-pipelines'
+            - name: OBC_NAME
+              value: 'iris-model'
+          command:
+            - /bin/bash
+            - -c
+            - |
+              echo "Copy secret ${OBC_NAME} to namespace ${TARGET_NAMESPACE}"
+              oc get secret ${OBC_NAME} -o json | \
+                jq 'del(.metadata["namespace","creationTimestamp","resourceVersion","selfLink","uid","ownerReferences","finalizers"])' | \
+                oc apply -f - -n ${TARGET_NAMESPACE}
+              echo "Copy configmap ${OBC_NAME} to namespace ${TARGET_NAMESPACE}"
+              oc get configmap ${OBC_NAME} -o json | \
+                jq 'del(.metadata["namespace","creationTimestamp","resourceVersion","selfLink","uid","ownerReferences","finalizers"])' | \
+                oc apply -f - -n ${TARGET_NAMESPACE}
+      restartPolicy: Never
+      serviceAccount: copy-obc
+      serviceAccountName: copy-obc
+  backoffLimit: 4

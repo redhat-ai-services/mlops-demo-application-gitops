@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - datascience-buckets.yaml
+  - datascience-pipelines-instance.yaml
   - grafana-applicationset.yaml
   - iris-inference-service-applicationset.yaml
   - iris-message-generator-applicationset.yaml
@@ -14,4 +15,4 @@ resources:
   - mlops-demo-pipeline-tasks.yaml
   - mlops-demo-pipelines-rbac.yaml
   - mlops-demo-pipelines.yaml
-  - odh-application.yaml
+  # - odh-application.yaml

@@ -17,7 +17,7 @@ spec:
       description: The location of the script to be executed
     - name: KUBEFLOW_ENDPOINT
       description: The endpoint URL for Kubeflow
-      default: "https://ds-pipeline-ui.mlops-demo-datascience.svc.cluster.local:8443"
+      default: "https://ds-pipeline-pipelines-definition:8443"
     - name: DEFAULT_STORAGE_CLASS
       description: The storage class Kubeflow will utilize for PVC creation
       default: "ocs-storagecluster-ceph-rbd"
